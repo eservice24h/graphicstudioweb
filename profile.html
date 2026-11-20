@@ -43,7 +43,6 @@
       line-height: 1.55;
     }
 
-    /* Header */
     header {
       background: var(--primary);
       color: #ffffff;
@@ -175,7 +174,6 @@
       color: var(--accent);
     }
 
-    /* Main Profile Layout */
     main {
       flex: 1;
       max-width: 960px;
@@ -306,10 +304,6 @@
       gap: 5px;
     }
 
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
     .form-label {
       font-size: 0.9rem;
       font-weight: 700;
@@ -368,7 +362,6 @@
       font-weight: 600;
     }
 
-    /* Footer */
     footer {
       background: #0f172a;
       color: #e2e8f0;
@@ -439,11 +432,11 @@
         <div class="more-menu">
           <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
           <div class="dropdown-menu" id="threeDotDropdown">
-            <a href="profile.html" id="profileMenuLink">প্রোফাইল</a>
-            <a href="auth.html" id="authMenuLink" style="display: none;">লগইন / সাইনআপ</a>
-            <a href="contact.html">যোগাযোগ</a>
-            <a href="admin-login.html">অ্যাডমিন লগইন</a>
-            <button type="button" id="logoutBtnHeader">লগআউট</button>
+            <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
+            <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
+            <a href="contact.html" id="contactMenuLink">যোগাযোগ</a>
+            <a href="admin-login.html" id="adminMenuLink">অ্যাডমিন লগইন</a>
+            <button type="button" id="logoutMenuBtn" style="display: none;">লগআউট</button>
           </div>
         </div>
       </div>
@@ -451,7 +444,6 @@
   </header>
 
   <main>
-    <!-- Left Summary Card -->
     <aside class="card profile-summary">
       <div class="avatar-circle" id="avatarInitial">U</div>
       <div class="profile-name" id="displayFullName">ইউজার</div>
@@ -462,11 +454,10 @@
       <div class="summary-actions">
         <a href="index.html" class="btn-outline">হোম পেজে ফিরে যান</a>
         <a href="digital-eservice.html" class="btn-outline">ডিজিটাল ই-সার্ভিস</a>
-        <button type="button" class="btn-logout-card" onclick="logoutUser()">লগআউট করুন</button>
+        <button type="button" class="btn-logout-card" id="logoutCardBtn">লগআউট করুন</button>
       </div>
     </aside>
 
-    <!-- Right Profile Details Card -->
     <section class="card">
       <h1 class="section-heading">ব্যক্তিগত তথ্য ও প্রোফাইল</h1>
       <p class="section-sub">আপনার অটো-জেনারেটেড ইউজারনেম ও ব্যক্তিগত তথ্য এখানে সংরক্ষিত রয়েছে।</p>
@@ -522,6 +513,7 @@
     </div>
   </footer>
 
+  <script src="auth-guard.js"></script>
   <script>
     const threeDotBtn = document.getElementById('threeDotBtn');
     const threeDotDropdown = document.getElementById('threeDotDropdown');
@@ -548,19 +540,17 @@
       return `${base}_${suffix}`;
     }
 
-    function logoutUser() {
+    document.getElementById('logoutCardBtn').addEventListener('click', () => {
       localStorage.removeItem('graphicStudioActiveUser');
+      if (window.GraphicStudioAuthGuard) {
+        window.GraphicStudioAuthGuard.syncMenuUI();
+      }
       window.location.href = 'index.html';
-    }
-
-    document.getElementById('logoutBtnHeader').addEventListener('click', logoutUser);
+    });
 
     const activeUser = JSON.parse(localStorage.getItem('graphicStudioActiveUser') || 'null');
 
-    if (!activeUser || !activeUser.mobile) {
-      window.location.href = 'auth.html';
-    } else {
-      // Auto-generate and persist username if not already set
+    if (activeUser && activeUser.mobile) {
       if (!activeUser.username) {
         activeUser.username = createAutoUsername(activeUser.fullName, activeUser.mobile);
         localStorage.setItem('graphicStudioActiveUser', JSON.stringify(activeUser));
