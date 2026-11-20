@@ -136,7 +136,7 @@
       position: absolute;
       right: 0;
       top: 44px;
-      min-width: 200px;
+      min-width: 195px;
       background: #ffffff;
       color: var(--text);
       border: 1px solid var(--border);
@@ -573,9 +573,9 @@
           <div class="dropdown-menu" id="threeDotDropdown">
             <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
             <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
-            <a href="contact.html">যোগাযোগ</a>
-            <a href="admin-login.html">অ্যাডমিন লগইন</a>
-            <button type="button" id="logoutBtn" style="display: none;">লগআউট</button>
+            <a href="contact.html" id="contactMenuLink">যোগাযোগ</a>
+            <a href="admin-login.html" id="adminMenuLink">অ্যাডমিন লগইন</a>
+            <button type="button" id="logoutMenuBtn" style="display: none;">লগআউট</button>
           </div>
         </div>
       </div>
@@ -739,6 +739,7 @@
     </div>
   </footer>
 
+  <script src="auth-guard.js"></script>
   <script>
     const threeDotBtn = document.getElementById('threeDotBtn');
     const threeDotDropdown = document.getElementById('threeDotDropdown');
@@ -755,27 +756,6 @@
         threeDotBtn.setAttribute('aria-expanded', 'false');
       }
     });
-
-    function updateThreeDotMenuByAuth() {
-      const activeUser = JSON.parse(localStorage.getItem('graphicStudioActiveUser') || 'null');
-      const isLoggedIn = Boolean(activeUser && activeUser.mobile);
-
-      const profileLink = document.getElementById('profileMenuLink');
-      const authLink = document.getElementById('authMenuLink');
-      const logoutBtn = document.getElementById('logoutBtn');
-
-      if (profileLink) profileLink.style.display = isLoggedIn ? 'block' : 'none';
-      if (logoutBtn) logoutBtn.style.display = isLoggedIn ? 'block' : 'none';
-      if (authLink) authLink.style.display = isLoggedIn ? 'none' : 'block';
-    }
-
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      localStorage.removeItem('graphicStudioActiveUser');
-      updateThreeDotMenuByAuth();
-      window.location.href = 'index.html';
-    });
-
-    updateThreeDotMenuByAuth();
 
     const bnMonths = [
       'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
@@ -859,6 +839,15 @@
       }
     }
 
+    function createAutoUsername(fullName, mobile) {
+      const base = (fullName || 'user')
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '')
+        .slice(0, 8) || 'user';
+      const suffix = (mobile || '').slice(-4) || Math.floor(1000 + Math.random() * 9000);
+      return `${base}_${suffix}`;
+    }
+
     function getUsersList() {
       return JSON.parse(localStorage.getItem('graphicStudioUsers') || '[]');
     }
@@ -907,9 +896,12 @@
       }
 
       const users = getUsersList();
-      const existingIndex = users.findIndex(u => u.mobile === mobile);
+      const existing = users.find(u => u.mobile === mobile);
+      const autoUsername = (existing && existing.username) ? existing.username : createAutoUsername(name, mobile);
+
       const newUser = {
-        createdAt: new Date().toISOString(),
+        createdAt: (existing && existing.createdAt) ? existing.createdAt : new Date().toISOString(),
+        username: autoUsername,
         fullName: name,
         mobile,
         whatsapp: mobile,
@@ -917,21 +909,25 @@
         password
       };
 
+      const existingIndex = users.findIndex(u => u.mobile === mobile);
       if (existingIndex >= 0) {
-        users[existingIndex] = newUser;
+        users[existingIndex] = { ...users[existingIndex], ...newUser };
       } else {
         users.push(newUser);
       }
 
       localStorage.setItem('graphicStudioUsers', JSON.stringify(users));
       localStorage.setItem('graphicStudioActiveUser', JSON.stringify(newUser));
-      updateThreeDotMenuByAuth();
+      if (window.GraphicStudioAuthGuard) {
+        window.GraphicStudioAuthGuard.syncMenuUI();
+      }
 
       const resBox = document.getElementById('signupResult');
       resBox.className = 'result-box success';
       resBox.innerHTML = `
         <strong>আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!</strong><br>
-        নাম: <strong>${name}</strong> | মোবাইল (WhatsApp): <strong>${mobile}</strong><br>
+        নাম: <strong>${name}</strong> | ইউজারনেম: <strong>@${autoUsername}</strong><br>
+        মোবাইল (WhatsApp): <strong>${mobile}</strong><br>
         এখন <strong>লগইন</strong> ট্যাব থেকে আপনার মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করুন।
       `;
 
@@ -961,6 +957,9 @@
       const matched = users.find(u => u.mobile === mobile && u.password === password);
 
       if (matched) {
+        if (!matched.username) {
+          matched.username = createAutoUsername(matched.fullName, matched.mobile);
+        }
         localStorage.setItem('graphicStudioActiveUser', JSON.stringify(matched));
         window.location.href = 'index.html';
       } else {
