@@ -43,7 +43,7 @@
       line-height: 1.55;
     }
 
-    /* Top Navigation Bar (Matches index.html) */
+    /* Header */
     header {
       background: var(--primary);
       color: #ffffff;
@@ -113,7 +113,7 @@
       color: #ffffff;
     }
 
-    /* Three-Dot Menu (Matches index.html) */
+    /* Three-Dot Menu */
     .more-menu {
       position: relative;
     }
@@ -131,11 +131,6 @@
       justify-content: center;
       font-size: 1.25rem;
       line-height: 1;
-      transition: background 0.2s ease;
-    }
-
-    .three-dot-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
     }
 
     .dropdown-menu {
@@ -143,7 +138,7 @@
       position: absolute;
       right: 0;
       top: 44px;
-      min-width: 200px;
+      min-width: 195px;
       background: #ffffff;
       color: var(--text);
       border: 1px solid var(--border);
@@ -173,7 +168,6 @@
       padding: 9px 12px;
       border-radius: 7px;
       cursor: pointer;
-      transition: background 0.15s ease;
     }
 
     .dropdown-menu a:hover,
@@ -182,214 +176,96 @@
       color: var(--accent);
     }
 
-    /* Main Content */
+    /* Main Layout */
     main {
       flex: 1;
       max-width: 1280px;
       width: 100%;
-      margin: 20px auto;
+      margin: 22px auto;
       padding: 0 18px;
-    }
-
-    .page-banner {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .page-banner h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .page-banner p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-top: 2px;
-    }
-
-    .badge-pill {
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid #bfdbfe;
-    }
-
-    /* Two-Column Layout */
-    .two-col-grid {
       display: grid;
-      grid-template-columns: 1.35fr 0.95fr;
+      grid-template-columns: 1.35fr 1fr;
       gap: 20px;
       align-items: start;
     }
 
-    .panel {
+    .card {
       background: var(--card);
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
       border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
     }
 
-    .section-title {
-      font-size: 1.15rem;
+    .page-title {
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--primary);
-      margin-bottom: 14px;
-      padding-bottom: 8px;
+      margin-bottom: 4px;
+    }
+
+    .page-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
       border-bottom: 2px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
     }
 
-    .service-item {
-      background: var(--card-soft);
+    .eservice-item {
       border: 1.5px solid var(--border);
       border-radius: 10px;
-      padding: 12px;
-      cursor: pointer;
+      padding: 14px;
+      background: var(--card-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
       transition: all 0.2s ease;
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
     }
 
-    .service-item:hover {
-      background: #ffffff;
-      border-color: #93c5fd;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
-    }
-
-    .service-item.active {
+    .eservice-item.selected {
+      border-color: var(--accent);
       background: var(--accent-soft);
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
     }
 
-    .icon-box {
-      width: 40px;
-      height: 40px;
-      min-width: 40px;
-      border-radius: 9px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .service-item.active .icon-box {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-    }
-
-    .service-meta {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .service-no {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
-    .service-title {
-      font-size: 0.96rem;
+    .eservice-title {
+      font-size: 1rem;
       font-weight: 700;
       color: var(--primary);
-      margin-top: 1px;
     }
 
-    .service-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 2px;
-      line-height: 1.38;
-    }
-
-    /* Right Column: CTA & Form */
-    .apply-box {
-      position: sticky;
-      top: 82px;
-    }
-
-    .cta-note {
-      background: var(--accent-soft);
-      border-left: 4px solid var(--accent);
-      color: #1e3a8a;
-      padding: 12px 14px;
-      border-radius: 8px;
+    .eservice-title.en {
+      font-family: 'Poppins', sans-serif;
       font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 14px;
     }
 
-    .selected-service-tag {
-      display: none;
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      color: var(--primary);
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 14px;
+    .eservice-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
     }
 
-    .selected-service-tag.show {
-      display: block;
-    }
-
-    .btn-apply-open {
-      width: 100%;
+    .btn-select {
+      align-self: flex-start;
       background: var(--accent);
       color: #ffffff;
       border: none;
-      border-radius: 9px;
-      padding: 13px 16px;
-      font-size: 1.05rem;
+      border-radius: 7px;
+      padding: 7px 14px;
+      font-size: 0.86rem;
       font-weight: 700;
       font-family: inherit;
       cursor: pointer;
-      transition: background 0.2s ease;
     }
 
-    .btn-apply-open:hover {
+    .btn-select:hover {
       background: var(--accent-hover);
-    }
-
-    .form-section {
-      display: none;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1.5px solid var(--border);
-    }
-
-    .form-section.open {
-      display: block;
     }
 
     .form-group {
@@ -404,19 +280,9 @@
       margin-bottom: 5px;
     }
 
-    .req {
-      color: var(--danger);
-    }
-
-    .opt {
-      color: var(--muted);
-      font-weight: 500;
-      font-size: 0.8rem;
-    }
-
     .form-control,
     .form-select,
-    .form-textarea {
+    textarea.form-control {
       width: 100%;
       padding: 10px 12px;
       border: 1.5px solid #cbd5e1;
@@ -428,76 +294,13 @@
     }
 
     .form-control:focus,
-    .form-select:focus,
-    .form-textarea:focus {
+    .form-select:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
     }
 
-    .form-textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    .nid-sub-panel {
-      display: none;
-      margin-top: 8px;
-      padding: 10px 12px;
-      background: var(--card-soft);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .nid-sub-panel.show {
-      display: block;
-    }
-
-    .radio-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 0.9rem;
-    }
-
-    .radio-group label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .dob-row {
-      display: grid;
-      grid-template-columns: 1fr 1.3fr 1fr;
-      gap: 8px;
-    }
-
-    .hint-msg {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .error-msg {
-      display: none;
-      font-size: 0.82rem;
-      color: var(--danger);
-      font-weight: 600;
-      margin-top: 4px;
-    }
-
-    .error-msg.show {
-      display: block;
-    }
-
-    .input-invalid {
-      border-color: var(--danger) !important;
-      background: var(--danger-bg) !important;
-    }
-
-    .btn-submit-form {
+    .btn-submit {
       width: 100%;
       background: var(--emerald);
       color: #ffffff;
@@ -508,29 +311,25 @@
       font-weight: 700;
       font-family: inherit;
       cursor: pointer;
-      transition: background 0.2s ease;
     }
 
-    .btn-submit-form:hover {
+    .btn-submit:hover {
       background: var(--emerald-hover);
     }
 
-    .submit-result {
+    .submit-msg {
       display: none;
       margin-top: 14px;
       padding: 12px 14px;
       border-radius: 8px;
-      font-size: 0.9rem;
-    }
-
-    .submit-result.success {
-      display: block;
       background: var(--success-bg);
       border: 1px solid #86efac;
       color: var(--success);
+      font-size: 0.9rem;
+      font-weight: 600;
     }
 
-    /* Footer (Matches index.html) */
+    /* Footer */
     footer {
       background: #0f172a;
       color: #e2e8f0;
@@ -565,13 +364,9 @@
       color: #cbd5e1;
     }
 
-    @media (max-width: 960px) {
-      .two-col-grid {
+    @media (max-width: 900px) {
+      main {
         grid-template-columns: 1fr;
-      }
-
-      .apply-box {
-        position: static;
       }
     }
 
@@ -595,16 +390,7 @@
         font-size: 1.15rem;
       }
 
-      main {
-        margin: 14px auto;
-        padding: 0 12px;
-      }
-
-      .panel {
-        padding: 12px;
-      }
-
-      .dob-row {
+      .services-grid {
         grid-template-columns: 1fr;
       }
 
@@ -618,7 +404,7 @@
 </head>
 <body>
 
-  <!-- Top Navigation Bar (Matches index.html) -->
+  <!-- Top Navigation Bar -->
   <header>
     <div class="nav-container">
       <a href="index.html" class="brand">
@@ -636,10 +422,11 @@
         <div class="more-menu">
           <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
           <div class="dropdown-menu" id="threeDotDropdown">
-            <a href="auth.html">লগইন / সাইনআপ</a>
-            <a href="contact.html">যোগাযোগ</a>
-            <a href="admin-login.html">অ্যাডমিন লগইন</a>
-            <button type="button" id="logoutActionBtn">লগআউট</button>
+            <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
+            <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
+            <a href="contact.html" id="contactMenuLink">যোগাযোগ</a>
+            <a href="admin-login.html" id="adminMenuLink">অ্যাডমিন লগইন</a>
+            <button type="button" id="logoutMenuBtn" style="display: none;">লগআউট</button>
           </div>
         </div>
       </div>
@@ -647,379 +434,85 @@
   </header>
 
   <main>
-    <div class="page-banner">
-      <div>
-        <h1>ডিজিটাল ই-সার্ভিস</h1>
-        <p>প্রয়োজনীয় সেবা বেছে নিন এবং নিচে থাকা আবেদন করুন বাটনে ক্লিক করে আবেদন সম্পন্ন করুন।</p>
+    <!-- Left: Digital e-Services List -->
+    <section class="card">
+      <h1 class="page-title">ডিজিটাল ই-সার্ভিস</h1>
+      <p class="page-sub">আপনার প্রয়োজনীয় অনলাইন সার্ভিস নির্বাচন করে ডান পাশের ফর্মে তথ্য দিন।</p>
+
+      <div class="services-grid">
+        <div class="eservice-item" data-service="এনআইডি কার্ডের সকল সার্ভিস">
+          <div>
+            <div class="eservice-title">এনআইডি কার্ডের সকল সার্ভিস</div>
+            <div class="eservice-desc">নতুন আবেদন, সংশোধন, রি-ইস্যু ও অনলাইন কপি সহায়তা।</div>
+          </div>
+          <button type="button" class="btn-select" onclick="selectService('এনআইডি কার্ডের সকল সার্ভিস', this)">সিলেক্ট করুন</button>
+        </div>
+
+        <div class="eservice-item" data-service="পাসপোর্টের সকল সার্ভিস">
+          <div>
+            <div class="eservice-title">পাসপোর্টের সকল সার্ভিস</div>
+            <div class="eservice-desc">ই-পাসপোর্ট আবেদন, তথ্য সংশোধন ও অ্যাপয়েন্টমেন্ট সহায়তা।</div>
+          </div>
+          <button type="button" class="btn-select" onclick="selectService('পাসপোর্টের সকল সার্ভিস', this)">সিলেক্ট করুন</button>
+        </div>
+
+        <div class="eservice-item" data-service="e-TIN, e-VAT, e-Return">
+          <div>
+            <div class="eservice-title en">e-TIN, e-VAT, e-Return</div>
+            <div class="eservice-desc">ই-টিন সার্টিফিকেট, রিটার্ন দাখিল ও ভ্যাট সংক্রান্ত অনলাইন সেবা।</div>
+          </div>
+          <button type="button" class="btn-select" onclick="selectService('e-TIN, e-VAT, e-Return', this)">সিলেক্ট করুন</button>
+        </div>
+
+        <div class="eservice-item" data-service="জন্ম নিবন্ধন ও অন্যান্য অনলাইন আবেদন">
+          <div>
+            <div class="eservice-title">জন্ম নিবন্ধন ও অন্যান্য আবেদন</div>
+            <div class="eservice-desc">জন্ম/মৃত্যু নিবন্ধন সংশোধন, ড্রাইভিং লাইসেন্স ও সরকারি ফর্ম।</div>
+          </div>
+          <button type="button" class="btn-select" onclick="selectService('জন্ম নিবন্ধন ও অন্যান্য অনলাইন আবেদন', this)">সিলেক্ট করুন</button>
+        </div>
       </div>
-      <span class="badge-pill">মোট ১৩টি সেবা</span>
-    </div>
+    </section>
 
-    <div class="two-col-grid">
-      <!-- Left Column: 13 Services with Custom Icons -->
-      <section class="panel" aria-label="ডিজিটাল ই-সার্ভিস তালিকা">
-        <h2 class="section-title">
-          <span>সেবাসমূহের তালিকা</span>
-          <small style="font-size:0.82rem; color:var(--muted); font-weight:500;">ক্লিক করে সেবা নির্বাচন করুন</small>
-        </h2>
+    <!-- Right: Service Request Form -->
+    <aside class="card">
+      <h2 class="page-title">সার্ভিস অনুরোধ ফর্ম</h2>
+      <p class="page-sub">আপনার প্রোফাইলের তথ্য অটো বসানো হয়েছে, প্রয়োজনীয় বিবরণ লিখুন।</p>
 
-        <div class="services-grid" id="servicesGrid">
-          <!-- 01. NID সেবা -->
-          <div class="service-item" data-service="NID সেবা" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                <circle cx="8" cy="11" r="2.2"/>
-                <path d="M4.8 17c.7-1.6 2-2.4 3.2-2.4s2.5.8 3.2 2.4"/>
-                <line x1="13.5" y1="9.5" x2="18.5" y2="9.5"/>
-                <line x1="13.5" y1="13" x2="18.5" y2="13"/>
-                <line x1="13.5" y1="16.5" x2="16.5" y2="16.5"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০১</div>
-              <div class="service-title">NID সেবা</div>
-              <div class="service-sub">স্মার্ট কার্ড, অনলাইন কপি, পুরনো এনআইডি ও সংশোধন।</div>
-            </div>
-          </div>
-
-          <!-- 02. পাসপোর্ট সেবা -->
-          <div class="service-item" data-service="পাসপোর্ট সেবা" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="2.5" width="16" height="19" rx="2"/>
-                <circle cx="12" cy="10.5" r="3.5"/>
-                <path d="M8.5 10.5h7"/>
-                <path d="M12 7v7"/>
-                <line x1="8.5" y1="17" x2="15.5" y2="17"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০২</div>
-              <div class="service-title">পাসপোর্ট সেবা</div>
-              <div class="service-sub">নতুন আবেদন, রি-ইস্যু, সংশোধন ও অ্যাপয়েন্টমেন্ট।</div>
-            </div>
-          </div>
-
-          <!-- 03. ড্রাইভিং লাইসেন্স -->
-          <div class="service-item" data-service="ড্রাইভিং লাইসেন্স" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="9"/>
-                <circle cx="12" cy="12" r="2.2"/>
-                <path d="M12 14.2V21"/>
-                <path d="M9.9 10.8L3.5 8.5"/>
-                <path d="M14.1 10.8l6.4-2.3"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০৩</div>
-              <div class="service-title">ড্রাইভিং লাইসেন্স</div>
-              <div class="service-sub">লার্নার আবেদন, স্মার্ট কার্ড প্রসেসিং ও সহায়তা।</div>
-            </div>
-          </div>
-
-          <!-- 04. জন্ম সনদ -->
-          <div class="service-item" data-service="জন্ম সনদ" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <circle cx="11" cy="14" r="2.2"/>
-                <path d="M8.5 18.5c.6-1.2 1.5-1.8 2.5-1.8s1.9.6 2.5 1.8"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০৪</div>
-              <div class="service-title">জন্ম সনদ</div>
-              <div class="service-sub">নতুন নিবন্ধন, তথ্য সংশোধন ও ডিজিটাল কপি।</div>
-            </div>
-          </div>
-
-          <!-- 05. e-TIN, e-VAT, e-Return -->
-          <div class="service-item" data-service="e-TIN, e-VAT, e-Return" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"/>
-                <line x1="8" y1="7" x2="16" y2="7"/>
-                <line x1="8" y1="11" x2="16" y2="11"/>
-                <line x1="8" y1="15" x2="13" y2="15"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০৫</div>
-              <div class="service-title">e-TIN, e-VAT, e-Return</div>
-              <div class="service-sub">রেজিস্ট্রেশন, রিটার্ন দাখিল ও কর সংক্রান্ত সেবা।</div>
-            </div>
-          </div>
-
-          <!-- 06. পুলিশ ক্লিয়ারেন্স -->
-          <div class="service-item" data-service="পুলিশ ক্লিয়ারেন্স" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <polyline points="9 12 11 14 15 10"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০৬</div>
-              <div class="service-title">পুলিশ ক্লিয়ারেন্স</div>
-              <div class="service-sub">ভিসা বা চাকরির জন্য পুলিশ ক্লিয়ারেন্স প্রসেসিং।</div>
-            </div>
-          </div>
-
-          <!-- 07. সার্টিফিকেট সংশোধন -->
-          <div class="service-item" data-service="সার্টিফিকেট সংশোধন" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="8" r="5"/>
-                <path d="M8.2 12.6L7 21l5-3 5 3-1.2-8.4"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০৭</div>
-              <div class="service-title">সার্টিফিকেট সংশোধন</div>
-              <div class="service-sub">শিক্ষাগত সনদের নাম, বয়স বা তথ্য সংশোধন।</div>
-            </div>
-          </div>
-
-          <!-- 08. ভর্তির আবেদন / ফলাফল পুনঃনিরীক্ষণের আবেদন -->
-          <div class="service-item" data-service="ভর্তির আবেদন / ফলাফল পুনঃনিরীক্ষণের আবেদন" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 10L12 5 2 10l10 5 10-5z"/>
-                <path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০৮</div>
-              <div class="service-title">ভর্তির আবেদন / ফলাফল পুনঃনিরীক্ষণের আবেদন</div>
-              <div class="service-sub">ভর্তি ফর্ম পূরণ ও ফলাফল পুনঃনিরীক্ষণের আবেদন।</div>
-            </div>
-          </div>
-
-          <!-- 09. CV (সিভি) -->
-          <div class="service-item" data-service="CV (সিভি)" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <circle cx="9.5" cy="13.5" r="1.5"/>
-                <path d="M7.5 17.5c.5-1 1.2-1.5 2-1.5s1.5.5 2 1.5"/>
-                <line x1="13" y1="13.5" x2="17" y2="13.5"/>
-                <line x1="13" y1="16.5" x2="17" y2="16.5"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">০৯</div>
-              <div class="service-title">CV (সিভি)</div>
-              <div class="service-sub">ইউরোপাস, জব, জেনারেল, একাডেমিক ও কাস্টম সিভি।</div>
-            </div>
-          </div>
-
-          <!-- 10. Statement of Purpose -->
-          <div class="service-item" data-service="Statement of Purpose" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20h9"/>
-                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">১০</div>
-              <div class="service-title">Statement of Purpose</div>
-              <div class="service-sub">Higher study, scholarship ও visa-এর জন্য SOP।</div>
-            </div>
-          </div>
-
-          <!-- 11. Letter Writing or Email -->
-          <div class="service-item" data-service="Letter Writing or Email" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="2"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">১১</div>
-              <div class="service-title">Letter Writing or Email</div>
-              <div class="service-sub">Official letter, cover letter ও formal email।</div>
-            </div>
-          </div>
-
-          <!-- 12. ট্রেন ও বাস টিকিট বুকিং -->
-          <div class="service-item" data-service="ট্রেন ও বাস টিকিট বুকিং" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2z"/>
-                <line x1="13" y1="5" x2="13" y2="7" stroke-dasharray="2 2"/>
-                <line x1="13" y1="11" x2="13" y2="13" stroke-dasharray="2 2"/>
-                <line x1="13" y1="17" x2="13" y2="19" stroke-dasharray="2 2"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">১২</div>
-              <div class="service-title">ট্রেন ও বাস টিকিট বুকিং</div>
-              <div class="service-sub">ট্রেন ও বাসের টিকিট বুকিং ও যাত্রা সহায়তা।</div>
-            </div>
-          </div>
-
-          <!-- 13. DBID (ডিজিটাল বিজনেস আইডি) নিবন্ধন -->
-          <div class="service-item" data-service="DBID (ডিজিটাল বিজনেস আইডি) নিবন্ধন" onclick="chooseService(this)">
-            <div class="icon-box" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="18" rx="2"/>
-                <path d="M7 8h10"/>
-                <path d="M7 12h6"/>
-                <circle cx="16.5" cy="15.5" r="2"/>
-              </svg>
-            </div>
-            <div class="service-meta">
-              <div class="service-no">১৩</div>
-              <div class="service-title">DBID (ডিজিটাল বিজনেস আইডি) নিবন্ধন</div>
-              <div class="service-sub">অনলাইন ও ডিজিটাল ব্যবসার DBID নিবন্ধন।</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Right Column: Instruction, Apply Button & Form -->
-      <aside class="panel apply-box" aria-label="আবেদন ফর্ম">
-        <h2 class="section-title">আবেদন করুন</h2>
-
-        <p class="cta-note">
-          আপনার প্রয়োজনীয় কাঙ্ক্ষিত সেবাটির জন্য নিচে থাকা আবেদন করুন বাটনটিতে ক্লিক করুন।
-        </p>
-
-        <div class="selected-service-tag" id="selectedServiceTag">
-          নির্বাচিত সেবা: <span id="selectedServiceName">কোনোটি নয়</span>
+      <form id="eserviceForm" onsubmit="submitEservice(event)">
+        <div class="form-group">
+          <label for="serviceType" class="form-label">সার্ভিসের ধরন</label>
+          <select id="serviceType" class="form-select" required>
+            <option value="এনআইডি কার্ডের সকল সার্ভিস">এনআইডি কার্ডের সকল সার্ভিস</option>
+            <option value="পাসপোর্টের সকল সার্ভিস">পাসপোর্টের সকল সার্ভিস</option>
+            <option value="e-TIN, e-VAT, e-Return">e-TIN, e-VAT, e-Return</option>
+            <option value="জন্ম নিবন্ধন ও অন্যান্য অনলাইন আবেদন">জন্ম নিবন্ধন ও অন্যান্য আবেদন</option>
+          </select>
         </div>
 
-        <button type="button" class="btn-apply-open" id="openFormBtn" onclick="openFormPanel()">
-          আবেদন করুন
-        </button>
-
-        <div class="form-section" id="formSection">
-          <form id="applicationForm" novalidate onsubmit="submitApplication(event)">
-            <div class="form-group">
-              <label for="serviceField" class="form-label">কাঙ্ক্ষিত সেবা <span class="req">*</span></label>
-              <select id="serviceField" name="service" class="form-select">
-                <option value="">-- সেবা নির্বাচন করুন --</option>
-                <option value="NID সেবা">০১. NID সেবা</option>
-                <option value="পাসপোর্ট সেবা">০২. পাসপোর্ট সেবা</option>
-                <option value="ড্রাইভিং লাইসেন্স">০৩. ড্রাইভিং লাইসেন্স</option>
-                <option value="জন্ম সনদ">০৪. জন্ম সনদ</option>
-                <option value="e-TIN, e-VAT, e-Return">০৫. e-TIN, e-VAT, e-Return</option>
-                <option value="পুলিশ ক্লিয়ারেন্স">০৬. পুলিশ ক্লিয়ারেন্স</option>
-                <option value="সার্টিফিকেট সংশোধন">০৭. সার্টিফিকেট সংশোধন</option>
-                <option value="ভর্তির আবেদন / ফলাফল পুনঃনিরীক্ষণের আবেদন">০৮. ভর্তির আবেদন / ফলাফল পুনঃনিরীক্ষণের আবেদন</option>
-                <option value="CV (সিভি)">০৯. CV (সিভি)</option>
-                <option value="Statement of Purpose">১০. Statement of Purpose</option>
-                <option value="Letter Writing or Email">১১. Letter Writing or Email</option>
-                <option value="ট্রেন ও বাস টিকিট বুকিং">১২. ট্রেন ও বাস টিকিট বুকিং</option>
-                <option value="DBID (ডিজিটাল বিজনেস আইডি) নিবন্ধন">১৩. DBID (ডিজিটাল বিজনেস আইডি) নিবন্ধন</option>
-              </select>
-              <div class="error-msg" id="serviceErr">অনুগ্রহ করে একটি সেবা নির্বাচন করুন।</div>
-            </div>
-
-            <div class="form-group">
-              <label for="nameField" class="form-label">কাস্টমারের নাম <span class="req">*</span></label>
-              <input type="text" id="nameField" name="name" class="form-control" placeholder="আপনার পূর্ণ নাম লিখুন" />
-              <div class="error-msg" id="nameErr">কাস্টমারের নাম লিখুন।</div>
-            </div>
-
-            <div class="form-group">
-              <label for="idTypeField" class="form-label">পরিচয়পত্রের ধরন <span class="req">*</span></label>
-              <select id="idTypeField" name="idType" class="form-select" onchange="onIdTypeChange()">
-                <option value="">-- পরিচয়পত্র নির্বাচন করুন --</option>
-                <option value="nid">এনআইডি কার্ড</option>
-                <option value="birth">জন্ম নিবন্ধন</option>
-              </select>
-              <div class="error-msg" id="idTypeErr">পরিচয়পত্রের ধরন নির্বাচন করুন।</div>
-
-              <div class="nid-sub-panel" id="nidSubPanel">
-                <div class="radio-group">
-                  <label>
-                    <input type="radio" name="nidType" value="smart_online" checked onchange="syncIdLimit()" />
-                    স্মার্ট কার্ড / অনলাইন কপি
-                  </label>
-                  <label>
-                    <input type="radio" name="nidType" value="old_nid" onchange="syncIdLimit()" />
-                    OLD NID
-                  </label>
-                </div>
-              </div>
-
-              <div id="idNumberBox" style="display:none; margin-top:10px;">
-                <label for="idNumberField" class="form-label" id="idNumberLbl">পরিচয়পত্র নম্বর <span class="req">*</span></label>
-                <input type="text" inputmode="numeric" id="idNumberField" name="idNumber" class="form-control" oninput="limitDigits(this)" />
-                <div class="hint-msg" id="idHint"></div>
-                <div class="error-msg" id="idNumberErr"></div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">জন্ম তারিখ <span class="req">*</span></label>
-              <div class="dob-row">
-                <select id="dobDay" name="dobDay" class="form-select" aria-label="দিন">
-                  <option value="">দিন</option>
-                </select>
-                <select id="dobMonth" name="dobMonth" class="form-select" aria-label="মাস">
-                  <option value="">মাস</option>
-                  <option value="জানুয়ারি">জানুয়ারি</option>
-                  <option value="ফেব্রুয়ারি">ফেব্রুয়ারি</option>
-                  <option value="মার্চ">মার্চ</option>
-                  <option value="এপ্রিল">এপ্রিল</option>
-                  <option value="মে">মে</option>
-                  <option value="জুন">জুন</option>
-                  <option value="জুলাই">জুলাই</option>
-                  <option value="আগস্ট">আগস্ট</option>
-                  <option value="সেপ্টেম্বর">সেপ্টেম্বর</option>
-                  <option value="অক্টোবর">অক্টোবর</option>
-                  <option value="নভেম্বর">নভেম্বর</option>
-                  <option value="ডিসেম্বর">ডিসেম্বর</option>
-                </select>
-                <select id="dobYear" name="dobYear" class="form-select" aria-label="সাল">
-                  <option value="">সাল</option>
-                </select>
-              </div>
-              <div class="error-msg" id="dobErr">জন্ম তারিখ, মাস ও সাল নির্বাচন করুন।</div>
-            </div>
-
-            <div class="form-group">
-              <label for="phoneField" class="form-label">ফোন নম্বর <span class="req">*</span></label>
-              <input type="text" inputmode="numeric" id="phoneField" name="phone" class="form-control" maxlength="11" placeholder="01XXXXXXXXX (১১ ডিজিট)" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 11)" />
-              <div class="error-msg" id="phoneErr">সঠিক ১১ ডিজিটের ফোন নম্বর লিখুন।</div>
-            </div>
-
-            <div class="form-group">
-              <label for="whatsappField" class="form-label">হোয়াটসঅ্যাপ নম্বর <span class="req">*</span></label>
-              <input type="text" inputmode="numeric" id="whatsappField" name="whatsapp" class="form-control" maxlength="15" placeholder="হোয়াটসঅ্যাপ নম্বর লিখুন" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 15)" />
-              <div class="error-msg" id="whatsappErr">হোয়াটসঅ্যাপ নম্বর লিখুন।</div>
-            </div>
-
-            <div class="form-group">
-              <label for="emailField" class="form-label">ইমেইল <span class="opt">(অপশনাল)</span></label>
-              <input type="email" id="emailField" name="email" class="form-control" placeholder="example@mail.com" />
-              <div class="error-msg" id="emailErr">সঠিক ইমেইল ঠিকানা লিখুন অথবা ফাঁকা রাখুন।</div>
-            </div>
-
-            <div class="form-group">
-              <label for="detailsField" class="form-label">সমস্যার বিষয় / কাজের বিবরণ <span class="req">*</span></label>
-              <textarea id="detailsField" name="details" class="form-textarea" placeholder="আপনার কাজের বা সমস্যার বিবরণ লিখুন..."></textarea>
-              <div class="error-msg" id="detailsErr">সমস্যার বিষয় বা কাজের বিবরণ লিখুন।</div>
-            </div>
-
-            <button type="submit" class="btn-submit-form">আবেদন জমা দিন</button>
-          </form>
-
-          <div class="submit-result" id="submitResult"></div>
+        <div class="form-group">
+          <label for="reqName" class="form-label">আবেদনকারীর নাম</label>
+          <input type="text" id="reqName" class="form-control" required />
         </div>
-      </aside>
-    </div>
+
+        <div class="form-group">
+          <label for="reqMobile" class="form-label">মোবাইল নম্বর (WhatsApp)</label>
+          <input type="text" id="reqMobile" class="form-control" maxlength="11" required />
+        </div>
+
+        <div class="form-group">
+          <label for="reqDetails" class="form-label">প্রয়োজনীয় তথ্য / নোট</label>
+          <textarea id="reqDetails" rows="3" class="form-control" placeholder="যেমন: কী সংশোধন বা আবেদন করতে চাচ্ছেন তা সংক্ষেপে লিখুন"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">অনুরোধ জমা দিন</button>
+      </form>
+
+      <div class="submit-msg" id="eserviceMsg"></div>
+    </aside>
   </main>
 
-  <!-- Footer (Matches index.html) -->
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-left">
@@ -1031,8 +524,8 @@
     </div>
   </footer>
 
+  <script src="auth-guard.js"></script>
   <script>
-    // Three-Dot Dropdown Toggle (Matches index.html)
     const threeDotBtn = document.getElementById('threeDotBtn');
     const threeDotDropdown = document.getElementById('threeDotDropdown');
 
@@ -1049,226 +542,44 @@
       }
     });
 
-    document.getElementById('logoutActionBtn').addEventListener('click', () => {
-      alert('আপনি সফলভাবে লগআউট করেছেন।');
-      window.location.href = 'index.html';
-    });
-
-    // Populate Day (1-31) and Year (1920-2030)
-    (function fillDob() {
-      const dayEl = document.getElementById('dobDay');
-      const yearEl = document.getElementById('dobYear');
-
-      for (let d = 1; d <= 31; d++) {
-        const opt = document.createElement('option');
-        opt.value = String(d).padStart(2, '0');
-        opt.textContent = d;
-        dayEl.appendChild(opt);
-      }
-
-      for (let y = 2030; y >= 1920; y--) {
-        const opt = document.createElement('option');
-        opt.value = String(y);
-        opt.textContent = y;
-        yearEl.appendChild(opt);
-      }
-    })();
-
-    function openFormPanel() {
-      document.getElementById('formSection').classList.add('open');
-      document.getElementById('serviceField').focus();
+    const activeUser = JSON.parse(localStorage.getItem('graphicStudioActiveUser') || 'null');
+    if (activeUser) {
+      document.getElementById('reqName').value = activeUser.fullName || '';
+      document.getElementById('reqMobile').value = activeUser.mobile || '';
     }
 
-    function chooseService(cardEl) {
-      document.querySelectorAll('.service-item').forEach(el => el.classList.remove('active'));
-      cardEl.classList.add('active');
-
-      const serviceName = cardEl.getAttribute('data-service');
-      const selectEl = document.getElementById('serviceField');
-      selectEl.value = serviceName;
-
-      document.getElementById('selectedServiceName').textContent = serviceName;
-      document.getElementById('selectedServiceTag').classList.add('show');
-      setFieldError('serviceField', 'serviceErr', false);
-
-      openFormPanel();
-    }
-
-    document.getElementById('serviceField').addEventListener('change', function () {
-      const val = this.value;
-      document.querySelectorAll('.service-item').forEach(el => {
-        el.classList.toggle('active', el.getAttribute('data-service') === val);
-      });
-      if (val) {
-        document.getElementById('selectedServiceName').textContent = val;
-        document.getElementById('selectedServiceTag').classList.add('show');
-      } else {
-        document.getElementById('selectedServiceTag').classList.remove('show');
-      }
-    });
-
-    function getTargetDigits() {
-      const type = document.getElementById('idTypeField').value;
-      if (type === 'birth') return 17;
-      if (type === 'nid') {
-        const sub = document.querySelector('input[name="nidType"]:checked').value;
-        return sub === 'old_nid' ? 13 : 10;
-      }
-      return 0;
-    }
-
-    function onIdTypeChange() {
-      const type = document.getElementById('idTypeField').value;
-      const subPanel = document.getElementById('nidSubPanel');
-      const numBox = document.getElementById('idNumberBox');
-      const numInput = document.getElementById('idNumberField');
-
-      numInput.value = '';
-      setFieldError('idNumberField', 'idNumberErr', false);
-
-      if (!type) {
-        subPanel.classList.remove('show');
-        numBox.style.display = 'none';
-        return;
-      }
-
-      numBox.style.display = 'block';
-      subPanel.classList.toggle('show', type === 'nid');
-      syncIdLimit();
-    }
-
-    function syncIdLimit() {
-      const type = document.getElementById('idTypeField').value;
-      const digits = getTargetDigits();
-      const numInput = document.getElementById('idNumberField');
-      const lbl = document.getElementById('idNumberLbl');
-      const hint = document.getElementById('idHint');
-
-      numInput.value = numInput.value.slice(0, digits);
-      numInput.maxLength = digits;
-
-      if (type === 'nid') {
-        const sub = document.querySelector('input[name="nidType"]:checked').value;
-        const labelText = sub === 'old_nid' ? 'OLD NID নম্বর' : 'স্মার্ট কার্ড / অনলাইন কপি নম্বর';
-        lbl.innerHTML = `${labelText} <span class="req">*</span>`;
-        hint.textContent = `এই অপশনের জন্য ঠিক ${digits} ডিজিটের নম্বর প্রযোজ্য।`;
-        numInput.placeholder = `ঠিক ${digits} ডিজিট লিখুন`;
-      } else if (type === 'birth') {
-        lbl.innerHTML = `জন্ম নিবন্ধন নম্বর <span class="req">*</span>`;
-        hint.textContent = `জন্ম নিবন্ধনের জন্য ঠিক ${digits} ডিজিটের নম্বর প্রযোজ্য।`;
-        numInput.placeholder = `ঠিক ${digits} ডিজিট লিখুন`;
+    function selectService(serviceName, btnEl) {
+      document.getElementById('serviceType').value = serviceName;
+      document.querySelectorAll('.eservice-item').forEach(item => item.classList.remove('selected'));
+      if (btnEl && btnEl.closest('.eservice-item')) {
+        btnEl.closest('.eservice-item').classList.add('selected');
       }
     }
 
-    function limitDigits(input) {
-      const digits = getTargetDigits();
-      let clean = input.value.replace(/\D/g, '');
-      if (digits > 0) clean = clean.slice(0, digits);
-      input.value = clean;
-    }
-
-    function setFieldError(inputId, errId, show, msg) {
-      const input = document.getElementById(inputId);
-      const err = document.getElementById(errId);
-      if (msg) err.textContent = msg;
-      if (show) {
-        if (input) input.classList.add('input-invalid');
-        err.classList.add('show');
-      } else {
-        if (input) input.classList.remove('input-invalid');
-        err.classList.remove('show');
-      }
-    }
-
-    function submitApplication(event) {
+    function submitEservice(event) {
       event.preventDefault();
-      let ok = true;
+      const serviceType = document.getElementById('serviceType').value;
+      const name = document.getElementById('reqName').value.trim();
+      const mobile = document.getElementById('reqMobile').value.trim();
+      const details = document.getElementById('reqDetails').value.trim();
 
-      const service = document.getElementById('serviceField').value.trim();
-      const name = document.getElementById('nameField').value.trim();
-      const idType = document.getElementById('idTypeField').value;
-      const idNum = document.getElementById('idNumberField').value.trim();
-      const targetDigits = getTargetDigits();
-      const day = document.getElementById('dobDay').value;
-      const month = document.getElementById('dobMonth').value;
-      const year = document.getElementById('dobYear').value;
-      const phone = document.getElementById('phoneField').value.trim();
-      const whatsapp = document.getElementById('whatsappField').value.trim();
-      const email = document.getElementById('emailField').value.trim();
-      const details = document.getElementById('detailsField').value.trim();
-
-      setFieldError('serviceField', 'serviceErr', !service);
-      if (!service) ok = false;
-
-      setFieldError('nameField', 'nameErr', !name);
-      if (!name) ok = false;
-
-      setFieldError('idTypeField', 'idTypeErr', !idType);
-      if (!idType) ok = false;
-
-      if (idType) {
-        if (idNum.length !== targetDigits) {
-          setFieldError('idNumberField', 'idNumberErr', true, `ঠিক ${targetDigits} ডিজিটের নম্বর লিখুন।`);
-          ok = false;
-        } else {
-          setFieldError('idNumberField', 'idNumberErr', false);
-        }
-      }
-
-      const dobOk = Boolean(day && month && year);
-      document.getElementById('dobErr').classList.toggle('show', !dobOk);
-      if (!dobOk) ok = false;
-
-      const phoneOk = /^01\d{9}$/.test(phone) && phone.length === 11;
-      setFieldError('phoneField', 'phoneErr', !phoneOk);
-      if (!phoneOk) ok = false;
-
-      const whatsappOk = whatsapp.length >= 10;
-      setFieldError('whatsappField', 'whatsappErr', !whatsappOk);
-      if (!whatsappOk) ok = false;
-
-      if (email) {
-        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        setFieldError('emailField', 'emailErr', !emailOk);
-        if (!emailOk) ok = false;
-      } else {
-        setFieldError('emailField', 'emailErr', false);
-      }
-
-      setFieldError('detailsField', 'detailsErr', !details);
-      if (!details) ok = false;
-
-      if (!ok) return;
-
-      const payload = {
-        submittedAt: new Date().toISOString(),
-        service,
+      const requests = JSON.parse(localStorage.getItem('graphicStudioServiceRequests') || '[]');
+      const newReq = {
+        id: 'GS-' + Date.now().toString().slice(-6),
+        createdAt: new Date().toISOString(),
+        username: activeUser ? activeUser.username : '',
+        serviceType,
         name,
-        idType,
-        idCategory: idType === 'nid' ? document.querySelector('input[name="nidType"]:checked').value : 'birth_reg',
-        idNumber: idNum,
-        dob: `${day} ${month}, ${year}`,
-        phone,
-        whatsapp,
-        email: email || 'নেই',
+        mobile,
         details
       };
+      requests.unshift(newReq);
+      localStorage.setItem('graphicStudioServiceRequests', JSON.stringify(requests));
 
-      console.log('Admin / Email payload:', payload);
-
-      const resBox = document.getElementById('submitResult');
-      resBox.className = 'submit-result success';
-      resBox.innerHTML = `
-        <strong>আবেদন সফলভাবে গৃহীত হয়েছে!</strong><br>
-        সেবা: <strong>${service}</strong> | নাম: <strong>${name}</strong><br>
-        শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।
-      `;
-
-      document.getElementById('applicationForm').reset();
-      document.getElementById('nidSubPanel').classList.remove('show');
-      document.getElementById('idNumberBox').style.display = 'none';
-      document.getElementById('selectedServiceTag').classList.remove('show');
-      document.querySelectorAll('.service-item').forEach(el => el.classList.remove('active'));
+      const msgBox = document.getElementById('eserviceMsg');
+      msgBox.style.display = 'block';
+      msgBox.innerHTML = `আপনার <strong>${serviceType}</strong>-এর অনুরোধ (কোড: <strong>${newReq.id}</strong>) সংরক্ষণ করা হয়েছে।`;
+      document.getElementById('reqDetails').value = '';
     }
   </script>
 </body>
