@@ -39,7 +39,6 @@
       flex-direction: column;
     }
 
-    /* Top Navigation Bar */
     header {
       background: var(--primary);
       color: #ffffff;
@@ -108,7 +107,6 @@
       color: #ffffff;
     }
 
-    /* Three-Dot Menu */
     .more-menu {
       position: relative;
     }
@@ -154,22 +152,29 @@
       display: flex;
     }
 
-    .dropdown-menu a {
+    .dropdown-menu a,
+    .dropdown-menu button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
       text-decoration: none;
       color: var(--text);
       font-size: 0.92rem;
       font-weight: 600;
+      font-family: inherit;
       padding: 9px 12px;
       border-radius: 7px;
+      cursor: pointer;
       transition: background 0.15s ease;
     }
 
-    .dropdown-menu a:hover {
+    .dropdown-menu a:hover,
+    .dropdown-menu button:hover {
       background: var(--bg);
       color: var(--accent);
     }
 
-    /* Main Content Layout */
     main {
       flex: 1;
       max-width: 1280px;
@@ -190,7 +195,6 @@
       border: 1px solid var(--border);
     }
 
-    /* Left Column: Live Clock, Notice Board & Highlighted Instructions */
     .left-column {
       display: flex;
       flex-direction: column;
@@ -227,7 +231,6 @@
       font-weight: 500;
     }
 
-    /* Notice Board Section */
     .notice-card {
       border: 1.5px solid var(--notice-border);
       background: var(--notice-bg);
@@ -267,7 +270,6 @@
       border-bottom: none;
     }
 
-    /* Highlighted Instruction Boxes (2 Separate Lines Below Notice Board) */
     .instruction-boxes {
       display: flex;
       flex-direction: column;
@@ -295,7 +297,6 @@
       border-color: var(--emerald);
     }
 
-    /* Right Column: Services & Boxes */
     .right-column {
       display: flex;
       flex-direction: column;
@@ -367,7 +368,6 @@
       font-size: 0.88rem;
     }
 
-    /* Bottom Tagline Banner */
     .tagline-banner {
       background: var(--primary);
       color: #ffffff;
@@ -378,7 +378,6 @@
       font-weight: 600;
     }
 
-    /* Footer */
     footer {
       background: #0f172a;
       color: #e2e8f0;
@@ -413,7 +412,6 @@
       color: #cbd5e1;
     }
 
-    /* Tablet & Mobile Normal Layout */
     @media (max-width: 900px) {
       main {
         grid-template-columns: 1fr;
@@ -476,7 +474,6 @@
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
   <header>
     <div class="nav-container">
       <div class="brand">
@@ -494,25 +491,24 @@
         <div class="more-menu">
           <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
           <div class="dropdown-menu" id="threeDotDropdown">
-            <a href="auth.html">লগইন / সাইনআপ</a>
+            <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
+            <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
             <a href="contact.html">যোগাযোগ</a>
             <a href="admin-login.html">অ্যাডমিন লগইন</a>
+            <button type="button" id="logoutMenuBtn" style="display: none;">লগআউট</button>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
   <main>
-    <!-- Left Column: Live Clock, Notice Board & Highlighted Instructions -->
     <aside class="panel left-column">
       <div class="clock-box">
         <div class="live-time" id="liveClock">12:00:00 <span class="ampm">AM</span></div>
         <div class="live-date" id="liveDate">তারিখ লোড হচ্ছে...</div>
       </div>
 
-      <!-- Notice Board -->
       <div class="notice-card">
         <div class="notice-header">
           <span>&#128226;</span>
@@ -528,7 +524,6 @@
         </div>
       </div>
 
-      <!-- Highlighted Instruction Boxes (2 Separate Lines Below Notice Board) -->
       <div class="instruction-boxes">
         <div class="highlight-box digital">
           ডিজিটাল ই-সার্ভিসের জন্য উপরের "ডিজিটাল ই-সার্ভিস" বাটনে ক্লিক করে প্রবেশ করুন।
@@ -539,9 +534,7 @@
       </div>
     </aside>
 
-    <!-- Right Column: Services & Boxes -->
     <section class="right-column">
-      <!-- Graphics Design Section -->
       <div class="panel">
         <h2 class="section-title">গ্রাফিক্স ডিজাইন</h2>
         <div class="cards-grid">
@@ -568,7 +561,6 @@
         </div>
       </div>
 
-      <!-- Digital e-Service Section -->
       <div class="panel">
         <h2 class="section-title">ডিজিটাল ই-সার্ভিস</h2>
         <div class="cards-grid">
@@ -586,7 +578,6 @@
             <div class="card-label">পাসপোর্টের সকল সার্ভিস</div>
           </div>
 
-          <!-- TIN Certificate Image with e-TIN, e-VAT, e-Return Label -->
           <div class="service-card">
             <div class="card-img-wrap">
               <img src="1etin.png" alt="e-TIN, e-VAT, e-Return" />
@@ -596,14 +587,12 @@
         </div>
       </div>
 
-      <!-- Bottom Tagline Banner -->
       <div class="tagline-banner">
         এছাড়াও ডিজাইন, প্রিন্টিং এবং অনলাইনের সকল কাজ এখন এক প্ল্যাটফর্মে।
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-left">
@@ -616,7 +605,6 @@
   </footer>
 
   <script>
-    // Three-Dot Dropdown Toggle
     const threeDotBtn = document.getElementById('threeDotBtn');
     const threeDotDropdown = document.getElementById('threeDotDropdown');
 
@@ -633,7 +621,27 @@
       }
     });
 
-    // Live Clock & Date
+    function updateThreeDotMenuByAuth() {
+      const activeUser = JSON.parse(localStorage.getItem('graphicStudioActiveUser') || 'null');
+      const isLoggedIn = Boolean(activeUser && activeUser.mobile);
+
+      const profileLink = document.getElementById('profileMenuLink');
+      const authLink = document.getElementById('authMenuLink');
+      const logoutBtn = document.getElementById('logoutMenuBtn');
+
+      if (profileLink) profileLink.style.display = isLoggedIn ? 'block' : 'none';
+      if (logoutBtn) logoutBtn.style.display = isLoggedIn ? 'block' : 'none';
+      if (authLink) authLink.style.display = isLoggedIn ? 'none' : 'block';
+    }
+
+    document.getElementById('logoutMenuBtn').addEventListener('click', () => {
+      localStorage.removeItem('graphicStudioActiveUser');
+      updateThreeDotMenuByAuth();
+      threeDotDropdown.classList.remove('show');
+    });
+
+    updateThreeDotMenuByAuth();
+
     const bnMonths = [
       'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
       'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
