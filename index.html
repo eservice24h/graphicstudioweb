@@ -39,6 +39,7 @@
       flex-direction: column;
     }
 
+    /* Top Navigation Bar */
     header {
       background: var(--primary);
       color: #ffffff;
@@ -61,6 +62,7 @@
     .brand {
       display: flex;
       flex-direction: column;
+      text-decoration: none;
     }
 
     .brand-title {
@@ -107,6 +109,7 @@
       color: #ffffff;
     }
 
+    /* Three-Dot Menu */
     .more-menu {
       position: relative;
     }
@@ -175,6 +178,7 @@
       color: var(--accent);
     }
 
+    /* Main Content Layout */
     main {
       flex: 1;
       max-width: 1280px;
@@ -195,6 +199,7 @@
       border: 1px solid var(--border);
     }
 
+    /* Left Column */
     .left-column {
       display: flex;
       flex-direction: column;
@@ -231,6 +236,7 @@
       font-weight: 500;
     }
 
+    /* Notice Board */
     .notice-card {
       border: 1.5px solid var(--notice-border);
       background: var(--notice-bg);
@@ -270,6 +276,7 @@
       border-bottom: none;
     }
 
+    /* Highlighted Instruction Boxes */
     .instruction-boxes {
       display: flex;
       flex-direction: column;
@@ -297,6 +304,7 @@
       border-color: var(--emerald);
     }
 
+    /* Right Column */
     .right-column {
       display: flex;
       flex-direction: column;
@@ -368,6 +376,7 @@
       font-size: 0.88rem;
     }
 
+    /* Bottom Tagline Banner */
     .tagline-banner {
       background: var(--primary);
       color: #ffffff;
@@ -378,6 +387,7 @@
       font-weight: 600;
     }
 
+    /* Footer */
     footer {
       background: #0f172a;
       color: #e2e8f0;
@@ -474,12 +484,13 @@
 </head>
 <body>
 
+  <!-- Top Navigation Bar -->
   <header>
     <div class="nav-container">
-      <div class="brand">
+      <a href="index.html" class="brand">
         <span class="brand-title">Graphic Studio</span>
         <span class="brand-sub">ভূইয়া অফসেট প্রিন্টিং প্রেস</span>
-      </div>
+      </a>
 
       <div class="nav-right">
         <nav>
@@ -493,8 +504,8 @@
           <div class="dropdown-menu" id="threeDotDropdown">
             <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
             <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
-            <a href="contact.html">যোগাযোগ</a>
-            <a href="admin-login.html">অ্যাডমিন লগইন</a>
+            <a href="contact.html" id="contactMenuLink">যোগাযোগ</a>
+            <a href="admin-login.html" id="adminMenuLink">অ্যাডমিন লগইন</a>
             <button type="button" id="logoutMenuBtn" style="display: none;">লগআউট</button>
           </div>
         </div>
@@ -502,7 +513,9 @@
     </div>
   </header>
 
+  <!-- Main Content -->
   <main>
+    <!-- Left Column -->
     <aside class="panel left-column">
       <div class="clock-box">
         <div class="live-time" id="liveClock">12:00:00 <span class="ampm">AM</span></div>
@@ -534,25 +547,26 @@
       </div>
     </aside>
 
+    <!-- Right Column -->
     <section class="right-column">
       <div class="panel">
         <h2 class="section-title">গ্রাফিক্স ডিজাইন</h2>
         <div class="cards-grid">
-          <div class="service-card">
+          <div class="service-card" data-requires-login="true">
             <div class="card-img-wrap">
               <img src="1vcard.jpg" alt="ভিজিটিং কার্ড" />
             </div>
             <div class="card-label">ভিজিটিং কার্ড</div>
           </div>
 
-          <div class="service-card">
+          <div class="service-card" data-requires-login="true">
             <div class="card-img-wrap">
               <img src="1poster.jpg" alt="পোস্টার" />
             </div>
             <div class="card-label">পোস্টার</div>
           </div>
 
-          <div class="service-card">
+          <div class="service-card" data-requires-login="true">
             <div class="card-img-wrap">
               <img src="1leaflet.jpg" alt="লিফলেট" />
             </div>
@@ -564,21 +578,21 @@
       <div class="panel">
         <h2 class="section-title">ডিজিটাল ই-সার্ভিস</h2>
         <div class="cards-grid">
-          <div class="service-card">
+          <div class="service-card" data-requires-login="true">
             <div class="card-img-wrap">
               <img src="1nid.jpg" alt="এনআইডি কার্ডের সকল সার্ভিস" />
             </div>
             <div class="card-label">এনআইডি কার্ডের সকল সার্ভিস</div>
           </div>
 
-          <div class="service-card">
+          <div class="service-card" data-requires-login="true">
             <div class="card-img-wrap">
               <img src="1passport.jpg" alt="পাসপোর্টের সকল সার্ভিস" />
             </div>
             <div class="card-label">পাসপোর্টের সকল সার্ভিস</div>
           </div>
 
-          <div class="service-card">
+          <div class="service-card" data-requires-login="true">
             <div class="card-img-wrap">
               <img src="1etin.png" alt="e-TIN, e-VAT, e-Return" />
             </div>
@@ -593,6 +607,7 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-left">
@@ -604,6 +619,7 @@
     </div>
   </footer>
 
+  <script src="auth-guard.js"></script>
   <script>
     const threeDotBtn = document.getElementById('threeDotBtn');
     const threeDotDropdown = document.getElementById('threeDotDropdown');
@@ -620,27 +636,6 @@
         threeDotBtn.setAttribute('aria-expanded', 'false');
       }
     });
-
-    function updateThreeDotMenuByAuth() {
-      const activeUser = JSON.parse(localStorage.getItem('graphicStudioActiveUser') || 'null');
-      const isLoggedIn = Boolean(activeUser && activeUser.mobile);
-
-      const profileLink = document.getElementById('profileMenuLink');
-      const authLink = document.getElementById('authMenuLink');
-      const logoutBtn = document.getElementById('logoutMenuBtn');
-
-      if (profileLink) profileLink.style.display = isLoggedIn ? 'block' : 'none';
-      if (logoutBtn) logoutBtn.style.display = isLoggedIn ? 'block' : 'none';
-      if (authLink) authLink.style.display = isLoggedIn ? 'none' : 'block';
-    }
-
-    document.getElementById('logoutMenuBtn').addEventListener('click', () => {
-      localStorage.removeItem('graphicStudioActiveUser');
-      updateThreeDotMenuByAuth();
-      threeDotDropdown.classList.remove('show');
-    });
-
-    updateThreeDotMenuByAuth();
 
     const bnMonths = [
       'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
