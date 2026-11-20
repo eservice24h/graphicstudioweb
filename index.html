@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>হোম পেজ | Graphic Studio</title>
+  <title>Graphic Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary: #0f172a;
-      --dark-panel: #0f172a;
-      --dark-panel-border: rgba(148, 163, 184, 0.35);
       --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --accent-light: #93c5fd;
-      --whatsapp: #25d366;
-      --whatsapp-hover: #1ebe5d;
-      --danger: #dc2626;
+      --accent-soft: #eff6ff;
+      --emerald: #059669;
+      --emerald-soft: #ecfdf5;
+      --notice-bg: #fffbeb;
+      --notice-border: #f59e0b;
+      --notice-text: #92400e;
       --bg: #f1f5f9;
       --card: #ffffff;
       --text: #1e293b;
@@ -38,10 +37,9 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.55;
     }
 
-    /* Header */
+    /* Top Navigation Bar */
     header {
       background: var(--primary);
       color: #ffffff;
@@ -111,7 +109,7 @@
       color: #ffffff;
     }
 
-    /* Three-dot menu */
+    /* Three-Dot Menu */
     .more-menu {
       position: relative;
     }
@@ -129,6 +127,11 @@
       justify-content: center;
       font-size: 1.25rem;
       line-height: 1;
+      transition: background 0.2s ease;
+    }
+
+    .three-dot-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .dropdown-menu {
@@ -136,7 +139,7 @@
       position: absolute;
       right: 0;
       top: 44px;
-      min-width: 210px;
+      min-width: 205px;
       background: #ffffff;
       color: var(--text);
       border: 1px solid var(--border);
@@ -166,6 +169,7 @@
       padding: 9px 12px;
       border-radius: 7px;
       cursor: pointer;
+      transition: background 0.15s ease;
     }
 
     .dropdown-menu a:hover,
@@ -174,237 +178,348 @@
       color: var(--accent);
     }
 
-    /* Main */
+    /* Main Content Layout */
     main {
       flex: 1;
-      max-width: 1120px;
+      max-width: 1280px;
       width: 100%;
-      margin: 22px auto 32px;
-      padding: 0 16px;
+      margin: 20px auto;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
     }
 
-    .hero-box {
-      background: rgba(15, 23, 42, 0.96);
+    .panel {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--border);
+    }
+
+    /* Left Column */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .clock-box {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
       color: #ffffff;
-      border: 1px solid var(--dark-panel-border);
-      border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14);
+      border-radius: 10px;
+      padding: 18px 14px;
+      text-align: center;
     }
 
-    .hero-top {
+    .live-time {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1.15;
+    }
+
+    .live-time span.ampm {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-left: 4px;
+      color: #93c5fd;
+    }
+
+    .live-date {
+      margin-top: 6px;
+      font-size: 0.98rem;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    /* Notice Board */
+    .notice-card {
+      border: 1.5px solid var(--notice-border);
+      background: var(--notice-bg);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .notice-header {
+      background: var(--notice-border);
+      color: #ffffff;
+      padding: 8px 14px;
+      font-size: 1rem;
+      font-weight: 700;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 10px;
+      gap: 8px;
     }
 
-    .hero-box h1 {
-      font-size: 1.65rem;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    .status-pill {
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 999px;
-      background: rgba(147, 197, 253, 0.16);
-      color: var(--accent-light);
-      border: 1px solid rgba(147, 197, 253, 0.35);
-    }
-
-    .hero-box p {
-      color: #cbd5e1;
-      font-size: 0.98rem;
-      margin-bottom: 16px;
-    }
-
-    .hero-actions {
+    .notice-body {
+      padding: 14px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--notice-text);
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .notice-item {
+      padding-bottom: 8px;
+      border-bottom: 1px dashed rgba(217, 119, 6, 0.35);
+      font-weight: 600;
+    }
+
+    .notice-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    /* Highlighted Instruction Boxes */
+    .instruction-boxes {
+      display: flex;
+      flex-direction: column;
       gap: 10px;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #ffffff;
-      border: none;
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-family: inherit;
+    .highlight-box {
+      padding: 11px 14px;
+      border-radius: 9px;
       font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      font-weight: 700;
+      border-left: 4px solid;
+      line-height: 1.4;
     }
 
-    .btn-primary:hover {
-      background: var(--accent-hover);
+    .highlight-box.digital {
+      background: var(--accent-soft);
+      color: #1e40af;
+      border-color: var(--accent);
     }
 
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.08);
-      color: #e2e8f0;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .highlight-box.graphics {
+      background: var(--emerald-soft);
+      color: #065f46;
+      border-color: var(--emerald);
     }
 
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.16);
+    /* Right Column */
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    /* Payment Gateways Section (Shown after login & menu click) */
-    .payment-section {
-      display: none;
-      background: var(--card);
+    .section-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .service-card {
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-      margin-top: 20px;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .payment-section.active {
+    .service-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+    }
+
+    .card-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #f8fafc;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
-    .payment-header {
+    .card-label {
+      padding: 9px 8px;
+      text-align: center;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .card-label.en-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Payment Gateways Section (Shown after login & three-dot click) */
+    .payment-panel {
+      display: none;
+    }
+
+    .payment-panel.active {
+      display: block;
+    }
+
+    .payment-panel-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 10px;
-      padding-bottom: 12px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
     }
 
-    .payment-header h2 {
-      font-size: 1.25rem;
-      font-weight: 700;
+    .payment-panel-header .section-title {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .btn-close-payment {
+      background: #f1f5f9;
       color: var(--primary);
+      border: 1px solid #cbd5e1;
+      padding: 5px 11px;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     .payment-form {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 10px;
       background: #f8fafc;
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 18px;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
     }
 
-    .form-group {
+    .form-field {
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
 
-    .form-group label {
-      font-size: 0.85rem;
+    .form-field label {
+      font-size: 0.83rem;
       font-weight: 700;
       color: var(--primary);
     }
 
-    .form-group input,
-    .form-group select {
-      padding: 9px 11px;
+    .form-field input,
+    .form-field select {
+      padding: 8px 10px;
       border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      border-radius: 7px;
       font-family: inherit;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       background: #ffffff;
       color: var(--text);
     }
 
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--accent);
+    .btn-add-gateway {
+      width: 100%;
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    .form-submit-wrap {
-      display: flex;
-      align-items: flex-end;
+    .btn-add-gateway:hover {
+      background: #1d4ed8;
     }
 
     .gateway-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
     }
 
     .gateway-card {
-      background: rgba(15, 23, 42, 0.95);
+      background: #0f172a;
       color: #e2e8f0;
-      border: 1px solid var(--dark-panel-border);
-      border-radius: 12px;
-      padding: 14px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 10px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 10px;
+      gap: 6px;
     }
 
     .gateway-type {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
-      color: var(--accent-light);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
+      color: #93c5fd;
     }
 
     .gateway-name {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       color: #ffffff;
     }
 
     .gateway-account {
       font-family: 'Poppins', sans-serif;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: #bfdbfe;
       word-break: break-all;
     }
 
     .gateway-note {
-      font-size: 0.83rem;
+      font-size: 0.8rem;
       color: #cbd5e1;
     }
 
     .gateway-actions {
       display: flex;
       gap: 8px;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     .btn-copy,
-    .btn-delete {
+    .btn-del {
       flex: 1;
-      padding: 7px 10px;
-      border-radius: 7px;
+      padding: 6px 8px;
+      border-radius: 6px;
       border: none;
       font-family: inherit;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
     }
@@ -414,27 +529,30 @@
       color: #bfdbfe;
     }
 
-    .btn-copy:hover {
-      background: rgba(147, 197, 253, 0.28);
-    }
-
-    .btn-delete {
-      background: rgba(220, 38, 38, 0.18);
+    .btn-del {
+      background: rgba(220, 38, 38, 0.22);
       color: #fca5a5;
     }
 
-    .btn-delete:hover {
-      background: rgba(220, 38, 38, 0.3);
+    .empty-gateway-msg {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e1;
     }
 
-    .empty-msg {
-      color: var(--muted);
-      font-size: 0.94rem;
+    /* Bottom Tagline Banner */
+    .tagline-banner {
+      background: var(--primary);
+      color: #ffffff;
       text-align: center;
-      padding: 16px;
-      background: #f8fafc;
-      border-radius: 10px;
-      border: 1px dashed #cbd5e1;
+      padding: 12px 16px;
+      border-radius: 9px;
+      font-size: 1rem;
+      font-weight: 600;
     }
 
     /* Footer */
@@ -472,6 +590,15 @@
       color: #cbd5e1;
     }
 
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        margin: 14px auto;
+        padding: 0 12px;
+        gap: 14px;
+      }
+    }
+
     @media (max-width: 600px) {
       header {
         padding: 10px 12px;
@@ -486,8 +613,33 @@
         padding: 5px 8px;
       }
 
-      .hero-box h1 {
-        font-size: 1.32rem;
+      .three-dot-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.15rem;
+      }
+
+      .panel {
+        padding: 12px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .card-img-wrap {
+        aspect-ratio: 16 / 10;
+      }
+
+      .tagline-banner {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+      }
+
+      .highlight-box {
+        font-size: 0.86rem;
+        padding: 10px 12px;
       }
 
       .footer-container {
@@ -500,6 +652,7 @@
 </head>
 <body>
 
+  <!-- Top Navigation Bar -->
   <header>
     <div class="nav-container">
       <a href="index.html" class="brand">
@@ -519,283 +672,6 @@
           <div class="dropdown-menu" id="threeDotDropdown">
             <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
             <button type="button" id="paymentSectionMenuBtn" style="display: none;">💳 পেমেন্ট সেকশন</button>
-            <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
-            <a href="contact.html" id="contactMenuLink">যোগাযোগ</a>
-            <a href="admin-login.html" id="adminMenuLink">অ্যাডমিন লগইন</a>
-            <button type="button" id="logoutMenuBtn" style="display: none;">লগআউট</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero-box">
-      <div class="hero-top">
-        <h1>স্বাগতম Graphic Studio-তে</h1>
-        <span class="status-pill" id="loginStatusBadge">অতিথি মোড (লগইন হয়নি)</span>
-      </div>
-      <p>ডিজাইন, প্রিন্টিং এবং ডিজিটাল সেবার জন্য সহজ ও পরিচ্ছন্ন পোর্টাল। লগইন করার পর থ্রি-ডট মেনু থেকে আপনার <strong>পেমেন্ট সেকশন</strong> খুলে পেমেন্ট গেটওয়েগুলো অ্যাড ও ম্যানেজ করতে পারবেন।</p>
-      <div class="hero-actions">
-        <button type="button" class="btn-primary" id="quickLoginBtn">🔐 এখনই লগইন করুন</button>
-        <button type="button" class="btn-outline" id="quickLogoutBtn" style="display: none;">লগআউট করুন</button>
-        <a href="design-printing.html" class="btn-outline">🎨 ডিজাইন সার্ভিস দেখুন</a>
-      </div>
-    </section>
-
-    <!-- Payment Gateways Management Section -->
-    <section class="payment-section" id="paymentSection" aria-label="পেমেন্ট সেকশন">
-      <div class="payment-header">
-        <h2>💳 পেমেন্ট গেটওয়ে সেকশন</h2>
-        <button type="button" class="btn-outline" id="closePaymentBtn" style="color: #0f172a; border-color: #cbd5e1;">বন্ধ করুন ✕</button>
-      </div>
-
-      <form class="payment-form" id="addGatewayForm">
-        <div class="form-group">
-          <label for="gatewayType">মাধ্যমের ধরন</label>
-          <select id="gatewayType" required>
-            <option value="Mobile Banking">Mobile Banking (bKash / Nagad / Rocket)</option>
-            <option value="Bank Account">Bank Account</option>
-            <option value="Payment Gateway">Payment Gateway / Wallet</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="gatewayName">গেটওয়ে / ব্যাংকের নাম</label>
-          <input type="text" id="gatewayName" placeholder="যেমন: bKash / BRAC Bank / Payoneer" required />
-        </div>
-
-        <div class="form-group">
-          <label for="gatewayAccount">নম্বর / অ্যাকাউন্ট তথ্য</label>
-          <input type="text" id="gatewayAccount" placeholder="যেমন: 017XXXXXXXX বা অ্যাকাউন্ট নম্বর" required />
-        </div>
-
-        <div class="form-group">
-          <label for="gatewayNote">নোট (ঐচ্ছিক)</label>
-          <input type="text" id="gatewayNote" placeholder="যেমন: Personal / Merchant / Branch" />
-        </div>
-
-        <div class="form-submit-wrap">
-          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">+ অ্যাড করুন</button>
-        </div>
-      </form>
-
-      <div class="gateway-grid" id="gatewayList"></div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <div class="footer-left">
-        Operated by <i>Istiake Mahin</i>
-      </div>
-      <div class="footer-right">
-        ভূইয়া অফসেট প্রিন্টিং প্রেস দ্বারা পরিচালিত
-      </div>
-    </div>
-  </footer>
-
-  <script src="auth-guard.js"></script>
-  <script>
-    const LOGIN_KEY = 'gs_user_logged_in';
-    const GATEWAYS_KEY = 'gs_payment_gateways_v1';
-
-    const threeDotBtn = document.getElementById('threeDotBtn');
-    const threeDotDropdown = document.getElementById('threeDotDropdown');
-    const paymentSectionMenuBtn = document.getElementById('paymentSectionMenuBtn');
-    const paymentSection = document.getElementById('paymentSection');
-    const closePaymentBtn = document.getElementById('closePaymentBtn');
-    const loginStatusBadge = document.getElementById('loginStatusBadge');
-    const quickLoginBtn = document.getElementById('quickLoginBtn');
-    const quickLogoutBtn = document.getElementById('quickLogoutBtn');
-    const logoutMenuBtn = document.getElementById('logoutMenuBtn');
-    const authMenuLink = document.getElementById('authMenuLink');
-    const profileMenuLink = document.getElementById('profileMenuLink');
-    const addGatewayForm = document.getElementById('addGatewayForm');
-    const gatewayList = document.getElementById('gatewayList');
-
-    function isLoggedIn() {
-      // auth-guard.js যদি আলাদা কোনো key সেট করে, সেটাও চেক করা যাবে
-      return localStorage.getItem(LOGIN_KEY) === 'true' || localStorage.getItem('isLoggedIn') === 'true';
-    }
-
-    function syncAuthUI() {
-      const loggedIn = isLoggedIn();
-      paymentSectionMenuBtn.style.display = loggedIn ? 'block' : 'none';
-      logoutMenuBtn.style.display = loggedIn ? 'block' : 'none';
-      profileMenuLink.style.display = loggedIn ? 'block' : 'none';
-      authMenuLink.style.display = loggedIn ? 'none' : 'block';
-      quickLoginBtn.style.display = loggedIn ? 'none' : 'inline-flex';
-      quickLogoutBtn.style.display = loggedIn ? 'inline-flex' : 'none';
-
-      if (loggedIn) {
-        loginStatusBadge.textContent = 'লগইন সক্রিয় ✓';
-      } else {
-        loginStatusBadge.textContent = 'অতিথি মোড (লগইন হয়নি)';
-        paymentSection.classList.remove('active');
-      }
-    }
-
-    function setLoggedInState(value) {
-      if (value) {
-        localStorage.setItem(LOGIN_KEY, 'true');
-        localStorage.setItem('isLoggedIn', 'true');
-      } else {
-        localStorage.removeItem(LOGIN_KEY);
-        localStorage.removeItem('isLoggedIn');
-      }
-      syncAuthUI();
-    }
-
-    quickLoginBtn.addEventListener('click', () => {
-      setLoggedInState(true);
-      renderGateways();
-    });
-
-    function handleLogout() {
-      setLoggedInState(false);
-      threeDotDropdown.classList.remove('show');
-      threeDotBtn.setAttribute('aria-expanded', 'false');
-    }
-
-    quickLogoutBtn.addEventListener('click', handleLogout);
-    logoutMenuBtn.addEventListener('click', handleLogout);
-
-    // Three-dot dropdown toggle
-    threeDotBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      syncAuthUI();
-      const isOpen = threeDotDropdown.classList.toggle('show');
-      threeDotBtn.setAttribute('aria-expanded', isOpen);
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!threeDotDropdown.contains(e.target) && e.target !== threeDotBtn) {
-        threeDotDropdown.classList.remove('show');
-        threeDotBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Open Payment Section from Three-dot menu
-    paymentSectionMenuBtn.addEventListener('click', () => {
-      if (!isLoggedIn()) return;
-      threeDotDropdown.classList.remove('show');
-      threeDotBtn.setAttribute('aria-expanded', 'false');
-      paymentSection.classList.add('active');
-      renderGateways();
-      paymentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-    closePaymentBtn.addEventListener('click', () => {
-      paymentSection.classList.remove('active');
-    });
-
-    function getGateways() {
-      try {
-        return JSON.parse(localStorage.getItem(GATEWAYS_KEY)) || [];
-      } catch {
-        return [];
-      }
-    }
-
-    function saveGateways(list) {
-      localStorage.setItem(GATEWAYS_KEY, JSON.stringify(list));
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    function renderGateways() {
-      const gateways = getGateways();
-      if (!gateways.length) {
-        gatewayList.innerHTML = '<div class="empty-msg">এখনো কোনো পেমেন্ট গেটওয়ে যুক্ত করা হয়নি। উপরের ফর্ম থেকে নতুন পেমেন্ট মাধ্যম অ্যাড করুন।</div>';
-        return;
-      }
-
-      gatewayList.innerHTML = gateways.map((item) => `
-        <article class="gateway-card">
-          <div>
-            <div class="gateway-type">${escapeHtml(item.type)}</div>
-            <h3 class="gateway-name">${escapeHtml(item.name)}</h3>
-            <div class="gateway-account">${escapeHtml(item.account)}</div>
-            ${item.note ? `<div class="gateway-note">${escapeHtml(item.note)}</div>` : ''}
-          </div>
-          <div class="gateway-actions">
-            <button type="button" class="btn-copy" data-copy="${escapeHtml(item.account)}">কপি নম্বর</button>
-            <button type="button" class="btn-delete" data-id="${item.id}">মুছুন</button>
-          </div>
-        </article>
-      `).join('');
-
-      gatewayList.querySelectorAll('.btn-copy').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const val = btn.getAttribute('data-copy');
-          navigator.clipboard?.writeText(val);
-          const oldText = btn.textContent;
-          btn.textContent = 'কপি হয়েছে ✓';
-          setTimeout(() => { btn.textContent = oldText; }, 1400);
-        });
-      });
-
-      gatewayList.querySelectorAll('.btn-delete').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const id = btn.getAttribute('data-id');
-          const updated = getGateways().filter((g) => g.id !== id);
-          saveGateways(updated);
-          renderGateways();
-        });
-      });
-    }
-
-    addGatewayForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!isLoggedIn()) return;
-
-      const type = document.getElementById('gatewayType').value.trim();
-      const name = document.getElementById('gatewayName').value.trim();
-      const account = document.getElementById('gatewayAccount').value.trim();
-      const note = document.getElementById('gatewayNote').value.trim();
-
-      if (!name || !account) return;
-
-      const list = getGateways();
-      list.unshift({
-        id: String(Date.now()),
-        type,
-        name,
-        account,
-        note
-      });
-      saveGateways(list);
-      addGatewayForm.reset();
-      renderGateways();
-    });
-
-    syncAuthUI();
-    renderGateways();
-  </script>
-</body>
-</html>
- <div class="nav-container">
-      <a href="index.html" class="brand">
-        <span class="brand-title">Graphic Studio</span>
-        <span class="brand-sub">ভূইয়া অফসেট প্রিন্টিং প্রেস</span>
-      </a>
-
-      <div class="nav-right">
-        <nav>
-          <a href="index.html" class="active">হোম পেজ</a>
-          <a href="design-printing.html">ডিজাইন অ্যান্ড প্রিন্টিং</a>
-          <a href="digital-eservice.html">ডিজিটাল ই-সার্ভিস</a>
-        </nav>
-
-        <div class="more-menu">
-          <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
-          <div class="dropdown-menu" id="threeDotDropdown">
-            <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
             <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
             <a href="contact.html" id="contactMenuLink">যোগাযোগ</a>
             <a href="admin-login.html" id="adminMenuLink">অ্যাডমিন লগইন</a>
@@ -894,6 +770,46 @@
         </div>
       </div>
 
+      <!-- লগইন করার পর থ্রি-ডট মেনুতে ক্লিক করলে এই পেমেন্ট সেকশনটি ওপেন হবে -->
+      <div class="panel payment-panel" id="paymentSectionPanel">
+        <div class="payment-panel-header">
+          <h2 class="section-title">💳 পেমেন্ট গেটওয়ে সেকশন</h2>
+          <button type="button" class="btn-close-payment" id="closePaymentPanelBtn">বন্ধ করুন ✕</button>
+        </div>
+
+        <form class="payment-form" id="addGatewayForm">
+          <div class="form-field">
+            <label for="gatewayType">মাধ্যমের ধরন</label>
+            <select id="gatewayType" required>
+              <option value="Mobile Banking">Mobile Banking (bKash / Nagad / Rocket)</option>
+              <option value="Bank Account">Bank Account</option>
+              <option value="Payment Gateway">Payment Gateway / Wallet</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="gatewayName">গেটওয়ে / ব্যাংকের নাম</label>
+            <input type="text" id="gatewayName" placeholder="যেমন: bKash / BRAC Bank" required />
+          </div>
+
+          <div class="form-field">
+            <label for="gatewayAccount">নম্বর / অ্যাকাউন্ট তথ্য</label>
+            <input type="text" id="gatewayAccount" placeholder="যেমন: 017XXXXXXXX" required />
+          </div>
+
+          <div class="form-field">
+            <label for="gatewayNote">নোট (ঐচ্ছিক)</label>
+            <input type="text" id="gatewayNote" placeholder="যেমন: Personal / Merchant" />
+          </div>
+
+          <div class="form-field" style="justify-content: flex-end;">
+            <button type="submit" class="btn-add-gateway">+ গেটওয়ে অ্যাড করুন</button>
+          </div>
+        </form>
+
+        <div class="gateway-grid" id="gatewayGrid"></div>
+      </div>
+
       <div class="tagline-banner">
         এছাড়াও ডিজাইন, প্রিন্টিং এবং অনলাইনের সকল কাজ এখন এক প্ল্যাটফর্মে।
       </div>
@@ -916,9 +832,44 @@
   <script>
     const threeDotBtn = document.getElementById('threeDotBtn');
     const threeDotDropdown = document.getElementById('threeDotDropdown');
+    const profileMenuLink = document.getElementById('profileMenuLink');
+    const logoutMenuBtn = document.getElementById('logoutMenuBtn');
+    const paymentSectionMenuBtn = document.getElementById('paymentSectionMenuBtn');
+    const paymentSectionPanel = document.getElementById('paymentSectionPanel');
+    const closePaymentPanelBtn = document.getElementById('closePaymentPanelBtn');
+    const addGatewayForm = document.getElementById('addGatewayForm');
+    const gatewayGrid = document.getElementById('gatewayGrid');
+
+    const GATEWAYS_STORAGE_KEY = 'gs_payment_gateways_list';
+
+    function checkUserLoggedIn() {
+      // auth-guard.js যদি profileMenuLink বা logoutMenuBtn দৃশ্যমান করে থাকে, অথবা storage-এ ইউজার থাকে
+      const guardLoggedIn =
+        (profileMenuLink && profileMenuLink.style.display !== 'none') ||
+        (logoutMenuBtn && logoutMenuBtn.style.display !== 'none');
+
+      const storageLoggedIn =
+        localStorage.getItem('isLoggedIn') === 'true' ||
+        localStorage.getItem('gs_user_logged_in') === 'true' ||
+        localStorage.getItem('loggedInUser') !== null ||
+        localStorage.getItem('currentUser') !== null ||
+        sessionStorage.getItem('loggedInUser') !== null ||
+        sessionStorage.getItem('currentUser') !== null;
+
+      return guardLoggedIn || storageLoggedIn;
+    }
+
+    function syncPaymentMenuOption() {
+      const loggedIn = checkUserLoggedIn();
+      paymentSectionMenuBtn.style.display = loggedIn ? 'block' : 'none';
+      if (!loggedIn) {
+        paymentSectionPanel.classList.remove('active');
+      }
+    }
 
     threeDotBtn.addEventListener('click', (e) => {
       e.stopPropagation();
+      syncPaymentMenuOption();
       const isOpen = threeDotDropdown.classList.toggle('show');
       threeDotBtn.setAttribute('aria-expanded', isOpen);
     });
@@ -929,6 +880,105 @@
         threeDotBtn.setAttribute('aria-expanded', 'false');
       }
     });
+
+    paymentSectionMenuBtn.addEventListener('click', () => {
+      if (!checkUserLoggedIn()) return;
+      threeDotDropdown.classList.remove('show');
+      threeDotBtn.setAttribute('aria-expanded', 'false');
+      paymentSectionPanel.classList.add('active');
+      renderGateways();
+      paymentSectionPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    closePaymentPanelBtn.addEventListener('click', () => {
+      paymentSectionPanel.classList.remove('active');
+    });
+
+    function getGateways() {
+      try {
+        return JSON.parse(localStorage.getItem(GATEWAYS_STORAGE_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveGateways(list) {
+      localStorage.setItem(GATEWAYS_STORAGE_KEY, JSON.stringify(list));
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderGateways() {
+      const list = getGateways();
+      if (!list.length) {
+        gatewayGrid.innerHTML = '<div class="empty-gateway-msg">এখনো কোনো পেমেন্ট গেটওয়ে যুক্ত করা হয়নি। উপরের ফর্ম থেকে নতুন মাধ্যম অ্যাড করুন।</div>';
+        return;
+      }
+
+      gatewayGrid.innerHTML = list.map((item) => `
+        <div class="gateway-card">
+          <div>
+            <div class="gateway-type">${escapeHtml(item.type)}</div>
+            <div class="gateway-name">${escapeHtml(item.name)}</div>
+            <div class="gateway-account">${escapeHtml(item.account)}</div>
+            ${item.note ? `<div class="gateway-note">${escapeHtml(item.note)}</div>` : ''}
+          </div>
+          <div class="gateway-actions">
+            <button type="button" class="btn-copy" data-copy="${escapeHtml(item.account)}">কপি নম্বর</button>
+            <button type="button" class="btn-del" data-id="${item.id}">মুছুন</button>
+          </div>
+        </div>
+      `).join('');
+
+      gatewayGrid.querySelectorAll('.btn-copy').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          navigator.clipboard?.writeText(btn.getAttribute('data-copy'));
+          const prev = btn.textContent;
+          btn.textContent = 'কপি হয়েছে ✓';
+          setTimeout(() => { btn.textContent = prev; }, 1400);
+        });
+      });
+
+      gatewayGrid.querySelectorAll('.btn-del').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          saveGateways(getGateways().filter((g) => g.id !== id));
+          renderGateways();
+        });
+      });
+    }
+
+    addGatewayForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!checkUserLoggedIn()) return;
+
+      const type = document.getElementById('gatewayType').value.trim();
+      const name = document.getElementById('gatewayName').value.trim();
+      const account = document.getElementById('gatewayAccount').value.trim();
+      const note = document.getElementById('gatewayNote').value.trim();
+
+      if (!name || !account) return;
+
+      const list = getGateways();
+      list.unshift({
+        id: String(Date.now()),
+        type,
+        name,
+        account,
+        note
+      });
+      saveGateways(list);
+      addGatewayForm.reset();
+      renderGateways();
+    });
+
+    // auth-guard.js লোড হওয়ার পর মেনু স্টেট সিঙ্ক করা
+    window.addEventListener('load', syncPaymentMenuOption);
+    syncPaymentMenuOption();
 
     const bnMonths = [
       'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
