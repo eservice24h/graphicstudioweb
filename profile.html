@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>আমার প্রোফাইল | Graphic Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: #eff6ff;
+      --emerald: #059669;
+      --emerald-hover: #047857;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --card-soft: #f8fafc;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.55;
+    }
+
+    /* Header */
+    header {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .brand-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #e2e8f0;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 7px 13px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .three-dot-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 44px;
+      min-width: 195px;
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+      padding: 6px;
+      z-index: 200;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .dropdown-menu a,
+    .dropdown-menu button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 9px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu button:hover {
+      background: var(--bg);
+      color: var(--accent);
+    }
+
+    /* Main Profile Layout */
+    main {
+      flex: 1;
+      max-width: 960px;
+      width: 100%;
+      margin: 26px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .profile-summary {
+      text-align: center;
+    }
+
+    .avatar-circle {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0f172a, #2563eb);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .profile-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .profile-username {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .profile-phone {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .badge-active {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #86efac;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .summary-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-outline {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #bfdbfe;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .btn-logout-card {
+      width: 100%;
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .section-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.94rem;
+      font-family: inherit;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .form-control[readonly] {
+      background: var(--card-soft);
+      color: var(--muted);
+      cursor: not-allowed;
+    }
+
+    .btn-save {
+      margin-top: 16px;
+      background: var(--emerald);
+      color: #ffffff;
+      border: none;
+      border-radius: 9px;
+      padding: 11px 18px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .btn-save:hover {
+      background: var(--emerald-hover);
+    }
+
+    .save-msg {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--success-bg);
+      border: 1px solid #86efac;
+      color: var(--success);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 24px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-left {
+      font-size: 0.95rem;
+      color: #ffffff;
+    }
+
+    .footer-left i {
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+      font-weight: 600;
+      color: #93c5fd;
+    }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span class="brand-title">Graphic Studio</span>
+        <span class="brand-sub">ভূইয়া অফসেট প্রিন্টিং প্রেস</span>
+      </a>
+
+      <div class="nav-right">
+        <nav>
+          <a href="index.html">হোম পেজ</a>
+          <a href="design-printing.html">ডিজাইন অ্যান্ড প্রিন্টিং</a>
+          <a href="digital-eservice.html">ডিজিটাল ই-সার্ভিস</a>
+        </nav>
+
+        <div class="more-menu">
+          <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
+          <div class="dropdown-menu" id="threeDotDropdown">
+            <a href="profile.html" id="profileMenuLink">প্রোফাইল</a>
+            <a href="auth.html" id="authMenuLink" style="display: none;">লগইন / সাইনআপ</a>
+            <a href="contact.html">যোগাযোগ</a>
+            <a href="admin-login.html">অ্যাডমিন লগইন</a>
+            <button type="button" id="logoutBtnHeader">লগআউট</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Left Summary Card -->
+    <aside class="card profile-summary">
+      <div class="avatar-circle" id="avatarInitial">U</div>
+      <div class="profile-name" id="displayFullName">ইউজার</div>
+      <div class="profile-username" id="displayUsername">@user</div>
+      <div class="profile-phone" id="displayMobile">01XXXXXXXXX</div>
+      <span class="badge-active">সক্রিয় অ্যাকাউন্ট</span>
+
+      <div class="summary-actions">
+        <a href="index.html" class="btn-outline">হোম পেজে ফিরে যান</a>
+        <a href="digital-eservice.html" class="btn-outline">ডিজিটাল ই-সার্ভিস</a>
+        <button type="button" class="btn-logout-card" onclick="logoutUser()">লগআউট করুন</button>
+      </div>
+    </aside>
+
+    <!-- Right Profile Details Card -->
+    <section class="card">
+      <h1 class="section-heading">ব্যক্তিগত তথ্য ও প্রোফাইল</h1>
+      <p class="section-sub">আপনার অটো-জেনারেটেড ইউজারনেম ও ব্যক্তিগত তথ্য এখানে সংরক্ষিত রয়েছে।</p>
+
+      <form id="profileForm" onsubmit="saveProfile(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="profUsername" class="form-label">ইউজারনেম (অটো সেট)</label>
+            <input type="text" id="profUsername" class="form-control" readonly />
+          </div>
+
+          <div class="form-group">
+            <label for="profMobile" class="form-label">মোবাইল নম্বর (WhatsApp)</label>
+            <input type="text" id="profMobile" class="form-control" readonly />
+          </div>
+
+          <div class="form-group">
+            <label for="profName" class="form-label">পূর্ণ নাম</label>
+            <input type="text" id="profName" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label for="profEmail" class="form-label">ইমেইল ঠিকানা</label>
+            <input type="email" id="profEmail" class="form-control" placeholder="example@mail.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="profIdNumber" class="form-label">NID / জন্ম নিবন্ধন নম্বর (ঐচ্ছিক)</label>
+            <input type="text" id="profIdNumber" class="form-control" placeholder="১০ / ১৩ / ১৭ ডিজিট" />
+          </div>
+
+          <div class="form-group">
+            <label for="profAddress" class="form-label">ঠিকানা (ঐচ্ছিক)</label>
+            <input type="text" id="profAddress" class="form-control" placeholder="গ্রাম/মহল্লা, উপজেলা, জেলা" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-save">তথ্য সংরক্ষণ করুন</button>
+      </form>
+
+      <div class="save-msg" id="saveMsg">প্রোফাইলের তথ্য সফলভাবে সংরক্ষণ করা হয়েছে।</div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        Operated by <i>Istiake Mahin</i>
+      </div>
+      <div class="footer-right">
+        ভূইয়া অফসেট প্রিন্টিং প্রেস দ্বারা পরিচালিত
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const threeDotBtn = document.getElementById('threeDotBtn');
+    const threeDotDropdown = document.getElementById('threeDotDropdown');
+
+    threeDotBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = threeDotDropdown.classList.toggle('show');
+      threeDotBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!threeDotDropdown.contains(e.target) && e.target !== threeDotBtn) {
+        threeDotDropdown.classList.remove('show');
+        threeDotBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    function createAutoUsername(fullName, mobile) {
+      const base = (fullName || 'user')
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '')
+        .slice(0, 8) || 'user';
+      const suffix = (mobile || '').slice(-4) || Math.floor(1000 + Math.random() * 9000);
+      return `${base}_${suffix}`;
+    }
+
+    function logoutUser() {
+      localStorage.removeItem('graphicStudioActiveUser');
+      window.location.href = 'index.html';
+    }
+
+    document.getElementById('logoutBtnHeader').addEventListener('click', logoutUser);
+
+    const activeUser = JSON.parse(localStorage.getItem('graphicStudioActiveUser') || 'null');
+
+    if (!activeUser || !activeUser.mobile) {
+      window.location.href = 'auth.html';
+    } else {
+      // Auto-generate and persist username if not already set
+      if (!activeUser.username) {
+        activeUser.username = createAutoUsername(activeUser.fullName, activeUser.mobile);
+        localStorage.setItem('graphicStudioActiveUser', JSON.stringify(activeUser));
+
+        const users = JSON.parse(localStorage.getItem('graphicStudioUsers') || '[]');
+        const idx = users.findIndex(u => u.mobile === activeUser.mobile);
+        if (idx >= 0) {
+          users[idx] = { ...users[idx], username: activeUser.username };
+          localStorage.setItem('graphicStudioUsers', JSON.stringify(users));
+        }
+      }
+
+      document.getElementById('displayFullName').textContent = activeUser.fullName || 'ইউজার';
+      document.getElementById('displayUsername').textContent = `@${activeUser.username}`;
+      document.getElementById('displayMobile').textContent = activeUser.mobile || '';
+      document.getElementById('avatarInitial').textContent = (activeUser.fullName || 'U').trim().charAt(0).toUpperCase();
+
+      document.getElementById('profUsername').value = activeUser.username;
+      document.getElementById('profName').value = activeUser.fullName || '';
+      document.getElementById('profMobile').value = activeUser.mobile || '';
+      document.getElementById('profEmail').value = activeUser.email || '';
+      document.getElementById('profIdNumber').value = activeUser.idNumber || '';
+      document.getElementById('profAddress').value = activeUser.address || '';
+    }
+
+    function saveProfile(event) {
+      event.preventDefault();
+      if (!activeUser) return;
+
+      activeUser.fullName = document.getElementById('profName').value.trim();
+      activeUser.email = document.getElementById('profEmail').value.trim();
+      activeUser.idNumber = document.getElementById('profIdNumber').value.trim();
+      activeUser.address = document.getElementById('profAddress').value.trim();
+
+      localStorage.setItem('graphicStudioActiveUser', JSON.stringify(activeUser));
+
+      const users = JSON.parse(localStorage.getItem('graphicStudioUsers') || '[]');
+      const idx = users.findIndex(u => u.mobile === activeUser.mobile);
+      if (idx >= 0) {
+        users[idx] = { ...users[idx], ...activeUser };
+        localStorage.setItem('graphicStudioUsers', JSON.stringify(users));
+      }
+
+      document.getElementById('displayFullName').textContent = activeUser.fullName;
+      document.getElementById('avatarInitial').textContent = activeUser.fullName.charAt(0).toUpperCase();
+
+      const msg = document.getElementById('saveMsg');
+      msg.style.display = 'block';
+      setTimeout(() => { msg.style.display = 'none'; }, 3000);
+    }
+  </script>
+</body>
+</html>
