@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>লগইন ও সাইনআপ | Graphic Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: #eff6ff;
+      --emerald: #059669;
+      --emerald-hover: #047857;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --card-soft: #f8fafc;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.55;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .brand-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #e2e8f0;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 7px 13px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .three-dot-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 44px;
+      min-width: 200px;
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+      padding: 6px;
+      z-index: 200;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .dropdown-menu a,
+    .dropdown-menu button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 9px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu button:hover {
+      background: var(--bg);
+      color: var(--accent);
+    }
+
+    /* Main Auth Box */
+    main {
+      flex: 1;
+      max-width: 540px;
+      width: 100%;
+      margin: 28px auto;
+      padding: 0 16px;
+    }
+
+    .auth-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .tab-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: var(--card-soft);
+      padding: 6px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.22);
+    }
+
+    .auth-panel {
+      display: none;
+    }
+
+    .auth-panel.active {
+      display: block;
+    }
+
+    .auth-heading {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .auth-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .req {
+      color: var(--danger);
+    }
+
+    .opt {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.82rem;
+    }
+
+    .form-control,
+    .form-select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* Captcha Box */
+    .captcha-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .captcha-code-box {
+      flex: 1;
+      min-width: 150px;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 8px;
+      user-select: none;
+      border: 1.5px solid #1d4ed8;
+    }
+
+    .captcha-length-select {
+      width: auto;
+      min-width: 118px;
+      padding: 9px 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .btn-refresh-captcha {
+      background: var(--card-soft);
+      color: var(--primary);
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-refresh-captcha:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.82rem;
+      color: var(--danger);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .error-msg.show {
+      display: block;
+    }
+
+    .input-invalid {
+      border-color: var(--danger) !important;
+      background: var(--danger-bg) !important;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--emerald);
+      color: #ffffff;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 16px;
+      font-size: 1.02rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin-top: 4px;
+    }
+
+    .btn-submit:hover {
+      background: var(--emerald-hover);
+    }
+
+    .btn-login-submit {
+      background: var(--accent);
+    }
+
+    .btn-login-submit:hover {
+      background: var(--accent-hover);
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .result-box.success {
+      display: block;
+      background: var(--success-bg);
+      border: 1px solid #86efac;
+      color: var(--success);
+    }
+
+    .result-box.error-box {
+      display: block;
+      background: var(--danger-bg);
+      border: 1px solid #fca5a5;
+      color: var(--danger);
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 24px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-left {
+      font-size: 0.95rem;
+      color: #ffffff;
+    }
+
+    .footer-left i {
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+      font-weight: 600;
+      color: #93c5fd;
+    }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 10px 12px;
+      }
+
+      .brand-title {
+        font-size: 1.25rem;
+      }
+
+      nav a {
+        font-size: 0.78rem;
+        padding: 5px 8px;
+      }
+
+      .three-dot-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.15rem;
+      }
+
+      .auth-card {
+        padding: 16px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span class="brand-title">Graphic Studio</span>
+        <span class="brand-sub">ভূইয়া অফসেট প্রিন্টিং প্রেস</span>
+      </a>
+
+      <div class="nav-right">
+        <nav>
+          <a href="index.html">হোম পেজ</a>
+          <a href="design-printing.html">ডিজাইন অ্যান্ড প্রিন্টিং</a>
+          <a href="digital-eservice.html">ডিজিটাল ই-সার্ভিস</a>
+        </nav>
+
+        <div class="more-menu">
+          <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
+          <div class="dropdown-menu" id="threeDotDropdown">
+            <a href="auth.html">লগইন / সাইনআপ</a>
+            <a href="contact.html">যোগাযোগ</a>
+            <a href="admin-login.html">অ্যাডমিন লগইন</a>
+            <button type="button" id="logoutBtn">লগআউট</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="auth-card">
+      <div class="tab-switch">
+        <button type="button" class="tab-btn active" id="tabLogin" onclick="switchAuthTab('login')">লগইন</button>
+        <button type="button" class="tab-btn" id="tabSignup" onclick="switchAuthTab('signup')">সাইনআপ</button>
+      </div>
+
+      <!-- Login Panel: Only Mobile Number + Password -->
+      <section class="auth-panel active" id="loginPanel">
+        <h1 class="auth-heading">অ্যাকাউন্টে লগইন করুন</h1>
+        <p class="auth-sub">যাদের অ্যাকাউন্ট আছে, তারা শুধু মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করুন।</p>
+
+        <form id="loginForm" novalidate onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginMobile" class="form-label">মোবাইল নম্বর <span class="req">*</span></label>
+            <input
+              type="text"
+              inputmode="numeric"
+              id="loginMobile"
+              class="form-control"
+              maxlength="11"
+              placeholder="01XXXXXXXXX (১১ ডিজিট)"
+              oninput="this.value = this.value.replace(/\D/g, '').slice(0, 11)"
+            />
+            <div class="error-msg" id="loginMobileErr">সঠিক ১১ ডিজিটের মোবাইল নম্বর লিখুন।</div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword" class="form-label">পাসওয়ার্ড <span class="req">*</span></label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="form-control"
+              placeholder="আপনার পাসওয়ার্ড লিখুন"
+            />
+            <div class="error-msg" id="loginPasswordErr">পাসওয়ার্ড লিখুন।</div>
+          </div>
+
+          <button type="submit" class="btn-submit btn-login-submit">লগইন করুন</button>
+        </form>
+
+        <div class="result-box" id="loginResult"></div>
+      </section>
+
+      <!-- Signup Panel: Full Name, Mobile (WhatsApp), Optional Email, Password + Confirm Password, 4/6-char English Captcha -->
+      <section class="auth-panel" id="signupPanel">
+        <h2 class="auth-heading">নতুন অ্যাকাউন্ট তৈরি করুন</h2>
+        <p class="auth-sub">অ্যাকাউন্ট না থাকলে নিচের তথ্য ও ক্যাপচা কোড দিয়ে নতুন অ্যাকাউন্ট তৈরি করুন।</p>
+
+        <form id="signupForm" novalidate onsubmit="handleSignup(event)">
+          <div class="form-group">
+            <label for="fullName" class="form-label">পূর্ণ নাম <span class="req">*</span></label>
+            <input type="text" id="fullName" name="fullName" class="form-control" placeholder="আপনার পূর্ণ নাম লিখুন" />
+            <div class="error-msg" id="fullNameErr">অনুগ্রহ করে আপনার পূর্ণ নাম লিখুন।</div>
+          </div>
+
+          <div class="form-group">
+            <label for="mobileWhatsapp" class="form-label">মোবাইল নম্বর (WhatsApp) <span class="req">*</span></label>
+            <input
+              type="text"
+              inputmode="numeric"
+              id="mobileWhatsapp"
+              name="mobileWhatsapp"
+              class="form-control"
+              maxlength="11"
+              placeholder="01XXXXXXXXX (১১ ডিজিট)"
+              oninput="this.value = this.value.replace(/\D/g, '').slice(0, 11)"
+            />
+            <div class="error-msg" id="mobileErr">সঠিক ১১ ডিজিটের মোবাইল (WhatsApp) নম্বর লিখুন।</div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupEmail" class="form-label">ইমেইল <span class="opt">(অপশনাল)</span></label>
+            <input type="email" id="signupEmail" name="email" class="form-control" placeholder="example@mail.com" />
+            <div class="error-msg" id="emailErr">সঠিক ইমেইল ঠিকানা লিখুন অথবা ফাঁকা রাখুন।</div>
+          </div>
+
+          <div class="form-group">
+            <label for="signupPassword" class="form-label">পাসওয়ার্ড <span class="req">*</span></label>
+            <input
+              type="password"
+              id="signupPassword"
+              name="password"
+              class="form-control"
+              placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড দিন"
+            />
+            <div class="error-msg" id="signupPasswordErr">কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড দিন।</div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">কনফার্ম পাসওয়ার্ড <span class="req">*</span></label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              class="form-control"
+              placeholder="পাসওয়ার্ডটি আবার লিখুন"
+            />
+            <div class="error-msg" id="confirmPasswordErr">পাসওয়ার্ড দুটো মিলেনি।</div>
+          </div>
+
+          <!-- Auto-generated 4 or 6 character English Captcha -->
+          <div class="form-group">
+            <label class="form-label">ক্যাপচা কোড (ইংরেজি ৪/৬ ক্যারেক্টার) <span class="req">*</span></label>
+            <div class="captcha-toolbar">
+              <div class="captcha-code-box" id="captchaDisplay" aria-live="polite">A7K9</div>
+
+              <select id="captchaLength" class="form-select captcha-length-select" aria-label="ক্যাপচা দৈর্ঘ্য" onchange="generateCaptcha()">
+                <option value="4" selected>৪ ক্যারেক্টার</option>
+                <option value="6">৬ ক্যারেক্টার</option>
+              </select>
+
+              <button type="button" class="btn-refresh-captcha" onclick="generateCaptcha()">↻ নতুন কোড</button>
+            </div>
+
+            <input
+              type="text"
+              id="captchaInput"
+              class="form-control"
+              placeholder="উপরের ইংরেজি কোডটি দেখে লিখুন"
+              autocomplete="off"
+            />
+            <div class="error-msg" id="captchaErr">ক্যাপচা কোডটি সঠিকভাবে মিলিয়ে লিখুন।</div>
+          </div>
+
+          <button type="submit" class="btn-submit">অ্যাকাউন্ট তৈরি করুন</button>
+        </form>
+
+        <div class="result-box" id="signupResult"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        Operated by <i>Istiake Mahin</i>
+      </div>
+      <div class="footer-right">
+        ভূইয়া অফসেট প্রিন্টিং প্রেস দ্বারা পরিচালিত
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const threeDotBtn = document.getElementById('threeDotBtn');
+    const threeDotDropdown = document.getElementById('threeDotDropdown');
+
+    threeDotBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = threeDotDropdown.classList.toggle('show');
+      threeDotBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!threeDotDropdown.contains(e.target) && e.target !== threeDotBtn) {
+        threeDotDropdown.classList.remove('show');
+        threeDotBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('graphicStudioActiveUser');
+      alert('আপনি লগআউট করেছেন।');
+      window.location.href = 'index.html';
+    });
+
+    function switchAuthTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('tabLogin').classList.toggle('active', isLogin);
+      document.getElementById('tabSignup').classList.toggle('active', !isLogin);
+      document.getElementById('loginPanel').classList.toggle('active', isLogin);
+      document.getElementById('signupPanel').classList.toggle('active', !isLogin);
+    }
+
+    let currentCaptchaCode = '';
+
+    function generateCaptcha() {
+      const len = parseInt(document.getElementById('captchaLength').value, 10) || 4;
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+      let code = '';
+      for (let i = 0; i < len; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      currentCaptchaCode = code;
+      document.getElementById('captchaDisplay').textContent = code;
+      const inputEl = document.getElementById('captchaInput');
+      inputEl.value = '';
+      inputEl.maxLength = len;
+      setErr('captchaInput', 'captchaErr', false);
+    }
+
+    function setErr(inputId, errId, show) {
+      const inp = document.getElementById(inputId);
+      const err = document.getElementById(errId);
+      if (show) {
+        inp.classList.add('input-invalid');
+        err.classList.add('show');
+      } else {
+        inp.classList.remove('input-invalid');
+        err.classList.remove('show');
+      }
+    }
+
+    function getUsersList() {
+      return JSON.parse(localStorage.getItem('graphicStudioUsers') || '[]');
+    }
+
+    function handleSignup(event) {
+      event.preventDefault();
+      let valid = true;
+
+      const name = document.getElementById('fullName').value.trim();
+      const mobile = document.getElementById('mobileWhatsapp').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const confirmPass = document.getElementById('confirmPassword').value;
+      const captchaEntered = document.getElementById('captchaInput').value.trim();
+
+      setErr('fullName', 'fullNameErr', !name);
+      if (!name) valid = false;
+
+      const mobileOk = /^01\d{9}$/.test(mobile);
+      setErr('mobileWhatsapp', 'mobileErr', !mobileOk);
+      if (!mobileOk) valid = false;
+
+      if (email) {
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        setErr('signupEmail', 'emailErr', !emailOk);
+        if (!emailOk) valid = false;
+      } else {
+        setErr('signupEmail', 'emailErr', false);
+      }
+
+      const passOk = password.length >= 6;
+      setErr('signupPassword', 'signupPasswordErr', !passOk);
+      if (!passOk) valid = false;
+
+      const confirmOk = confirmPass === password && confirmPass.length > 0;
+      setErr('confirmPassword', 'confirmPasswordErr', !confirmOk);
+      if (!confirmOk) valid = false;
+
+      const captchaOk = captchaEntered === currentCaptchaCode;
+      setErr('captchaInput', 'captchaErr', !captchaOk);
+      if (!captchaOk) valid = false;
+
+      if (!valid) {
+        if (!captchaOk) generateCaptcha();
+        return;
+      }
+
+      const users = getUsersList();
+      const existingIndex = users.findIndex(u => u.mobile === mobile);
+      const newUser = {
+        createdAt: new Date().toISOString(),
+        fullName: name,
+        mobile,
+        whatsapp: mobile,
+        email: email || 'দেওয়া হয়নি',
+        password
+      };
+
+      if (existingIndex >= 0) {
+        users[existingIndex] = newUser;
+      } else {
+        users.push(newUser);
+      }
+
+      localStorage.setItem('graphicStudioUsers', JSON.stringify(users));
+      localStorage.setItem('graphicStudioActiveUser', JSON.stringify(newUser));
+
+      const resBox = document.getElementById('signupResult');
+      resBox.className = 'result-box success';
+      resBox.innerHTML = `
+        <strong>আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!</strong><br>
+        নাম: <strong>${name}</strong> | মোবাইল (WhatsApp): <strong>${mobile}</strong><br>
+        এখন থেকে আপনি শুধু মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করতে পারবেন।
+      `;
+
+      document.getElementById('signupForm').reset();
+      generateCaptcha();
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const mobile = document.getElementById('loginMobile').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      const mobileOk = /^01\d{9}$/.test(mobile);
+      setErr('loginMobile', 'loginMobileErr', !mobileOk);
+
+      const passOk = password.length > 0;
+      setErr('loginPassword', 'loginPasswordErr', !passOk);
+
+      const resBox = document.getElementById('loginResult');
+      resBox.className = 'result-box';
+      resBox.style.display = 'none';
+
+      if (!mobileOk || !passOk) return;
+
+      const users = getUsersList();
+      const matchedUser = users.find(u => u.mobile === mobile && u.password === password);
+
+      if (matchedUser) {
+        localStorage.setItem('graphicStudioActiveUser', JSON.stringify(matchedUser));
+        resBox.className = 'result-box success';
+        resBox.innerHTML = `
+          স্বাগতম, <strong>${matchedUser.fullName}</strong>! আপনি সফলভাবে লগইন করেছেন।<br>
+          <a href="digital-eservice.html" style="color:inherit; font-weight:700; text-decoration:underline;">ডিজিটাল ই-সার্ভিস পেজে যান →</a>
+        `;
+      } else {
+        resBox.className = 'result-box error-box';
+        resBox.innerHTML = `মোবাইল নম্বর বা পাসওয়ার্ড সঠিক নয়। অ্যাকাউন্ট না থাকলে <strong>সাইনআপ</strong> ট্যাব থেকে নতুন অ্যাকাউন্ট তৈরি করুন।`;
+      }
+    }
+
+    generateCaptcha();
+  </script>
+</body>
+</html>
