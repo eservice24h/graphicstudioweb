@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ডিজিটাল ই-সার্ভিস | Istiake Mahin</title>
+  <title>ডিজিটাল ই-সার্ভিস | Graphic Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,6 +17,9 @@
       --primary: #1d4ed8;
       --primary-hover: #1e40af;
       --primary-soft: #eff6ff;
+      --nav-bg: #162232;
+      --nav-surface: #223247;
+      --nav-border: rgba(255, 255, 255, 0.14);
       --border: #e2e8f0;
       --danger: #dc2626;
       --danger-bg: #fef2f2;
@@ -44,40 +47,147 @@
       line-height: 1.55;
     }
 
+    /* Top Blue/Navy Bar */
+    .top-bar {
+      background: var(--nav-bg);
+      color: #ffffff;
+      border-bottom: 1px solid var(--nav-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.14);
+    }
+
+    .top-bar-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .brand-sub {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: var(--nav-surface);
+      color: #f8fafc;
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-btn:hover {
+      background: #2f4562;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-btn.active {
+      background: var(--primary);
+      border-color: #60a5fa;
+      color: #ffffff;
+    }
+
+    .more-menu-wrap {
+      position: relative;
+    }
+
+    .more-btn {
+      background: var(--nav-surface);
+      color: #ffffff;
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      width: 34px;
+      height: 34px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .more-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 40px;
+      min-width: 190px;
+      background: var(--nav-bg);
+      border: 1px solid var(--nav-border);
+      border-radius: 10px;
+      padding: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+      z-index: 200;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .more-dropdown.show {
+      display: flex;
+    }
+
+    .more-dropdown a,
+    .more-dropdown button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: #f8fafc;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .more-dropdown a:hover,
+    .more-dropdown button:hover {
+      background: var(--nav-surface);
+    }
+
     .container {
       width: 100%;
       max-width: 1220px;
       margin: 0 auto;
-      padding: 28px 18px 40px;
+      padding: 26px 18px 40px;
       flex: 1;
-    }
-
-    .top-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .back-home-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      color: var(--text-main);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-
-    .back-home-link:hover {
-      border-color: var(--primary);
-      color: var(--primary);
     }
 
     .page-header {
@@ -237,7 +347,7 @@
       padding: 24px;
       box-shadow: var(--shadow-md);
       position: sticky;
-      top: 20px;
+      top: 84px;
     }
 
     .cta-hero {
@@ -467,19 +577,20 @@
       color: var(--success);
     }
 
-    /* Consistent Page Footer */
-    .site-footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
+    /* Matching Bottom Dark-Blue/Navy Bar */
+    .bottom-bar {
+      background: var(--nav-bg);
+      color: #ffffff;
+      border-top: 1px solid var(--nav-border);
       padding: 16px 18px;
       text-align: center;
-      color: var(--text-muted);
-      font-size: 0.92rem;
+      font-size: 0.95rem;
     }
 
-    .site-footer strong {
-      color: var(--text-main);
+    .bottom-bar strong {
+      color: #ffffff;
       font-weight: 700;
+      letter-spacing: 0.2px;
     }
 
     @media (max-width: 960px) {
@@ -500,11 +611,40 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="top-nav">
-      <a href="index.html" class="back-home-link">← হোম পেজ</a>
-    </div>
+  <!-- Top Matching Blue/Navy Bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="index.html" class="brand-block">
+        <span class="brand-title">Graphic Studio</span>
+        <span class="brand-sub">ভূইয়া অফসেট প্রিন্টিং প্রেস</span>
+      </a>
 
+      <nav class="nav-actions" aria-label="প্রধান নেভিগেশন">
+        <a href="index.html" class="nav-btn">হোম পেজ</a>
+        <a href="index.html#design-printing" class="nav-btn">ডিজাইন অ্যান্ড প্রিন্টিং</a>
+        <a href="digital-eservice.html" class="nav-btn active">ডিজিটাল ই-সার্ভিস</a>
+        <a href="index.html#contact" class="nav-btn">যোগাযোগ</a>
+        <a href="index.html#login" class="nav-btn">লগইন</a>
+        <button type="button" class="nav-btn" onclick="handleLogoutAction()">লগআউট</button>
+        <a href="index.html#admin-login" class="nav-btn">এডমিন লগইন</a>
+
+        <div class="more-menu-wrap">
+          <button type="button" class="more-btn" aria-label="আরও মেনু" onclick="toggleMoreMenu(event)">⋮</button>
+          <div class="more-dropdown" id="moreDropdown">
+            <a href="index.html">হোম পেজ</a>
+            <a href="index.html#design-printing">ডিজাইন অ্যান্ড প্রিন্টিং</a>
+            <a href="digital-eservice.html">ডিজিটাল ই-সার্ভিস</a>
+            <a href="index.html#contact">যোগাযোগ</a>
+            <a href="index.html#login">লগইন</a>
+            <button type="button" onclick="handleLogoutAction()">লগআউট</button>
+            <a href="index.html#admin-login">এডমিন লগইন</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
     <header class="page-header">
       <div class="page-badge">✨ দ্রুত ও নির্ভরযোগ্য অনলাইন সেবা</div>
       <h1>ডিজিটাল ই-সার্ভিস পোর্টাল</h1>
@@ -876,11 +1016,27 @@
     </main>
   </div>
 
-  <footer class="site-footer">
+  <!-- Bottom Matching Blue/Navy Bar -->
+  <footer class="bottom-bar">
     <strong>Istiake Mahin</strong>
   </footer>
 
   <script>
+    function toggleMoreMenu(event) {
+      event.stopPropagation();
+      document.getElementById('moreDropdown').classList.toggle('show');
+    }
+
+    document.addEventListener('click', function () {
+      const menu = document.getElementById('moreDropdown');
+      if (menu) menu.classList.remove('show');
+    });
+
+    function handleLogoutAction() {
+      alert('আপনি সফলভাবে লগআউট করেছেন।');
+      window.location.href = 'index.html';
+    }
+
     (function populateDobDropdowns() {
       const daySelect = document.getElementById('dobDay');
       const yearSelect = document.getElementById('dobYear');
