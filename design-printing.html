@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>গ্রাফিক ডিজাইন সার্ভিস | Graphic Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0f172a;
+      --dark-panel: #0f172a;
+      --dark-panel-border: rgba(148, 163, 184, 0.35);
+      --accent: #2563eb;
+      --accent-light: #93c5fd;
+      --whatsapp: #25d366;
+      --whatsapp-hover: #1ebe5d;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.55;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+
+    .brand-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #e2e8f0;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 7px 13px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .three-dot-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 44px;
+      min-width: 195px;
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+      padding: 6px;
+      z-index: 200;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .dropdown-menu a,
+    .dropdown-menu button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 9px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu button:hover {
+      background: var(--bg);
+      color: var(--accent);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      max-width: 1120px;
+      width: 100%;
+      margin: 22px auto 32px;
+      padding: 0 16px;
+    }
+
+    .hero-banner {
+      background: rgba(15, 23, 42, 0.96);
+      color: #ffffff;
+      border: 1px solid var(--dark-panel-border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14);
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(147, 197, 253, 0.16);
+      color: var(--accent-light);
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .hero-banner h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .hero-banner p {
+      font-size: 0.98rem;
+      color: #cbd5e1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+      border-color: #93c5fd;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #0f172a;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .service-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .card-order-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      background: #0f172a;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 9px 14px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+    }
+
+    .card-order-btn:hover {
+      background: var(--accent);
+    }
+
+    /* Bottom Direct Contact Strip */
+    .bottom-cta {
+      margin-top: 24px;
+      background: rgba(15, 23, 42, 0.95);
+      color: #e2e8f0;
+      border: 1px solid var(--dark-panel-border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .bottom-cta-text h2 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #93c5fd;
+      margin-bottom: 2px;
+    }
+
+    .bottom-cta-text p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: var(--whatsapp);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: var(--whatsapp-hover);
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 24px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-left {
+      font-size: 0.95rem;
+      color: #ffffff;
+    }
+
+    .footer-left i {
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+      font-weight: 600;
+      color: #93c5fd;
+    }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 10px 12px;
+      }
+
+      .brand-title {
+        font-size: 1.25rem;
+      }
+
+      nav a {
+        font-size: 0.78rem;
+        padding: 5px 8px;
+      }
+
+      .three-dot-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.15rem;
+      }
+
+      .hero-banner {
+        padding: 18px 14px;
+      }
+
+      .hero-banner h1 {
+        font-size: 1.32rem;
+      }
+
+      .bottom-cta {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .btn-whatsapp {
+        width: 100%;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span class="brand-title">Graphic Studio</span>
+        <span class="brand-sub">ভূইয়া অফসেট প্রিন্টিং প্রেস</span>
+      </a>
+
+      <div class="nav-right">
+        <nav>
+          <a href="index.html">হোম পেজ</a>
+          <a href="design-printing.html" class="active">ডিজাইন অ্যান্ড প্রিন্টিং</a>
+          <a href="digital-eservice.html">ডিজিটাল ই-সার্ভিস</a>
+        </nav>
+
+        <div class="more-menu">
+          <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
+          <div class="dropdown-menu" id="threeDotDropdown">
+            <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
+            <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
+            <a href="contact.html" id="contactMenuLink">যোগাযোগ</a>
+            <a href="admin-login.html" id="adminMenuLink">অ্যাডমিন লগইন</a>
+            <button type="button" id="logoutMenuBtn" style="display: none;">লগআউট</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-banner">
+      <span class="hero-badge">🎨 প্রফেশনাল গ্রাফিক ডিজাইন</span>
+      <h1>আমাদের গ্রাফিক ডিজাইন সেবাসমূহ</h1>
+      <p>আকর্ষণীয়, আধুনিক ও প্রিন্ট-রেডি কোয়ালিটির সব ধরনের গ্রাফিক ডিজাইন অত্যন্ত যত্নসহকারে তৈরি করা হয়।</p>
+    </section>
+
+    <section class="services-grid" aria-label="গ্রাফিক ডিজাইন তালিকা">
+      <!-- 1. লোগো ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">✒️</div>
+            <h2 class="service-title">লোগো ডিজাইন</h2>
+          </div>
+          <p class="service-desc">ব্যবসা, প্রতিষ্ঠান, অনলাইন শপ বা ব্যক্তিগত ব্র্যান্ডের জন্য ইউনিক ও প্রফেশনাল লোগো ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%B2%E0%A7%8B%E0%A6%97%E0%A7%8B%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+
+      <!-- 2. ভিজিটিং কার্ড ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">💳</div>
+            <h2 class="service-title">ভিজিটিং কার্ড ডিজাইন</h2>
+          </div>
+          <p class="service-desc">ব্যক্তিগত, কর্পোরেট বা ব্যবসায়িক পরিচয়ের জন্য আধুনিক সিঙ্গেল ও ডাবল সাইড ভিজিটিং কার্ড ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AD%E0%A6%BF%E0%A6%9C%E0%A6%BF%E0%A6%9F%E0%A6%BF%E0%A6%82%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+
+      <!-- 3. আইডি কার্ড ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">🪪</div>
+            <h2 class="service-title">আইডি কার্ড ডিজাইন</h2>
+          </div>
+          <p class="service-desc">স্কুল, কলেজ, অফিস, কোম্পানি বা ইভেন্টের জন্য স্মার্ট ও প্রিন্ট-রেডি আইডি কার্ড ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%86%E0%A6%87%E0%A6%A1%E0%A6%BF%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+
+      <!-- 4. পোস্টার ও ব্যানার ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">🖼️</div>
+            <h2 class="service-title">পোস্টার ও ব্যানার ডিজাইন</h2>
+          </div>
+          <p class="service-desc">প্রতিষ্ঠানের প্রচারণা, অনুষ্ঠান, সাইনবোর্ড ও যেকোনো বিজ্ঞাপনের জন্য আকর্ষণীয় পোস্টার ও ব্যানার ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AA%E0%A7%8B%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%E0%A6%93%20%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%B0%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+
+      <!-- 5. ফেসবুক পোস্ট ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">📱</div>
+            <h2 class="service-title">ফেসবুক পোস্ট ডিজাইন</h2>
+          </div>
+          <p class="service-desc">ফেসবুক পেজ মার্কেটিং, প্রোডাক্ট প্রমোশন, অফার ও শুভেচ্ছা বার্তার জন্য নজরকাড়া সোশ্যাল মিডিয়া ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AB%E0%A7%87%E0%A6%B8%E0%A6%AC%E0%A7%81%E0%A6%95%20%E0%A6%AA%E0%A7%8B%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+
+      <!-- 6. বিয়ের কার্ড ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">💌</div>
+            <h2 class="service-title">বিয়ের কার্ড ডিজাইন</h2>
+          </div>
+          <p class="service-desc">বিবাহ, বৌভাত ও গায়ে হলুদের অনুষ্ঠানের জন্য রুচিশীল ও নান্দনিক আমন্ত্রণপত্রের কার্ড ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%AC%E0%A6%BF%E0%A7%9F%E0%A7%87%E0%A6%B0%20%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%A1%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+
+      <!-- 7. রাজনৈতিক পোস্টার ও ব্যানার ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">📢</div>
+            <h2 class="service-title">রাজনৈতিক পোস্টার ও ব্যানার ডিজাইন</h2>
+          </div>
+          <p class="service-desc">দলীয় কর্মসূচি, শুভেচ্ছা, সভা-সমাবেশ ও সাংগঠনিক প্রচারণার জন্য হাই-রেজোলিউশন পোস্টার ও ব্যানার ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%B0%E0%A6%BE%E0%A6%9C%E0%A6%A8%E0%A7%88%E0%A6%A4%E0%A6%BF%E0%A6%95%20%E0%A6%AA%E0%A7%8B%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%E0%A6%93%20%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%B0%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+
+      <!-- 8. নির্বাচনী পোস্টার ডিজাইন -->
+      <article class="service-card">
+        <div>
+          <div class="card-top">
+            <div class="service-icon" aria-hidden="true">🗳️</div>
+            <h2 class="service-title">নির্বাচনী পোস্টার ডিজাইন</h2>
+          </div>
+          <p class="service-desc">নির্বাচনী প্রচারণা, প্রতীক পরিচিতি, লিফলেট ও পোস্টারের জন্য স্পষ্ট ও আকর্ষণীয় প্রিন্ট-রেডি ডিজাইন।</p>
+        </div>
+        <a href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%A8%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%AC%E0%A6%BE%E0%A6%9A%E0%A6%A8%E0%A7%80%20%E0%A6%AA%E0%A7%8B%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%B0%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%95%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="card-order-btn">💬 ডিজাইন অর্ডার করুন</a>
+      </article>
+    </section>
+
+    <section class="bottom-cta" aria-label="সরাসরি যোগাযোগ">
+      <div class="bottom-cta-text">
+        <h2>কাস্টম ডিজাইন বা প্রিন্টিংয়ের জন্য কথা বলুন</h2>
+        <p>যেকোনো সাইজ বা কাস্টম ডিজাইনের প্রয়োজনে সরাসরি আমাদের WhatsApp-এ মেসেজ করুন।</p>
+      </div>
+      <a
+        href="https://wa.me/8801781230028?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20Graphic%20Studio%20%E0%A6%B0%20%E0%A6%97%E0%A7%8D%E0%A6%B0%E0%A6%BE%E0%A6%AB%E0%A6%BF%E0%A6%95%20%E0%A6%A1%E0%A6%BF%E0%A6%9C%E0%A6%BE%E0%A6%87%E0%A6%A8%20%E0%A6%B8%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%AD%E0%A6%BF%E0%A6%B8%20%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A7%87%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-whatsapp"
+      >
+        💬 WhatsApp-এ সরাসরি মেসেজ করুন
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        Operated by <i>Istiake Mahin</i>
+      </div>
+      <div class="footer-right">
+        ভূইয়া অফসেট প্রিন্টিং প্রেস দ্বারা পরিচালিত
+      </div>
+    </div>
+  </footer>
+
+  <script src="auth-guard.js"></script>
+  <script>
+    const threeDotBtn = document.getElementById('threeDotBtn');
+    const threeDotDropdown = document.getElementById('threeDotDropdown');
+
+    threeDotBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = threeDotDropdown.classList.toggle('show');
+      threeDotBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!threeDotDropdown.contains(e.target) && e.target !== threeDotBtn) {
+        threeDotDropdown.classList.remove('show');
+        threeDotBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>
