@@ -43,7 +43,6 @@
       line-height: 1.55;
     }
 
-    /* Top Navigation Bar */
     header {
       background: var(--primary);
       color: #ffffff;
@@ -175,7 +174,6 @@
       color: var(--accent);
     }
 
-    /* Main Desktop Split Layout: Left = Time, Right = Login/Signup */
     main {
       flex: 1;
       max-width: 1180px;
@@ -352,7 +350,6 @@
       cursor: pointer;
     }
 
-    /* Captcha Box */
     .captcha-toolbar {
       display: flex;
       align-items: center;
@@ -471,7 +468,6 @@
       color: var(--danger);
     }
 
-    /* Footer */
     footer {
       background: #0f172a;
       color: #e2e8f0;
@@ -558,7 +554,6 @@
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
   <header>
     <div class="nav-container">
       <a href="index.html" class="brand">
@@ -576,33 +571,30 @@
         <div class="more-menu">
           <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
           <div class="dropdown-menu" id="threeDotDropdown">
-            <a href="auth.html">লগইন / সাইনআপ</a>
+            <a href="profile.html" id="profileMenuLink" style="display: none;">প্রোফাইল</a>
+            <a href="auth.html" id="authMenuLink">লগইন / সাইনআপ</a>
             <a href="contact.html">যোগাযোগ</a>
             <a href="admin-login.html">অ্যাডমিন লগইন</a>
-            <button type="button" id="logoutBtn">লগআউট</button>
+            <button type="button" id="logoutBtn" style="display: none;">লগআউট</button>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Desktop View: Left = Live Time, Right = Login / Signup -->
   <main>
-    <!-- Left Column: Live Time -->
     <aside class="time-panel" aria-label="বর্তমান সময়">
       <div class="time-label">বর্তমান সময় ও তারিখ</div>
       <div class="live-time" id="liveClock">12:00:00 <span class="ampm">AM</span></div>
       <div class="live-date" id="liveDate">তারিখ লোড হচ্ছে...</div>
     </aside>
 
-    <!-- Right Column: Login / Signup -->
     <div class="auth-card">
       <div class="tab-switch">
         <button type="button" class="tab-btn active" id="tabLogin" onclick="switchAuthTab('login')">লগইন</button>
         <button type="button" class="tab-btn" id="tabSignup" onclick="switchAuthTab('signup')">সাইনআপ</button>
       </div>
 
-      <!-- Login Panel: 11-digit Mobile Number + Password -->
       <section class="auth-panel active" id="loginPanel">
         <h1 class="auth-heading">অ্যাকাউন্টে লগইন করুন</h1>
         <p class="auth-sub">আপনার ১১ ডিজিটের মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করুন।</p>
@@ -646,7 +638,6 @@
         <div class="result-box" id="loginResult"></div>
       </section>
 
-      <!-- Signup Panel: Full Name, Mobile (WhatsApp), Optional Email, Password + Confirm Password, 4/6-char English Captcha -->
       <section class="auth-panel" id="signupPanel">
         <h2 class="auth-heading">নতুন অ্যাকাউন্ট তৈরি করুন</h2>
         <p class="auth-sub">অ্যাকাউন্ট না থাকলে নিচের তথ্য ও ক্যাপচা কোড দিয়ে নতুন অ্যাকাউন্ট তৈরি করুন।</p>
@@ -706,7 +697,6 @@
             <div class="error-msg" id="confirmPasswordErr">পাসওয়ার্ড দুটো মিলেনি।</div>
           </div>
 
-          <!-- Auto-generated 4 or 6 character English Captcha -->
           <div class="form-group">
             <label class="form-label">ক্যাপচা কোড (ইংরেজি ৪/৬ ক্যারেক্টার) <span class="req">*</span></label>
             <div class="captcha-toolbar">
@@ -738,7 +728,6 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-left">
@@ -767,13 +756,27 @@
       }
     });
 
+    function updateThreeDotMenuByAuth() {
+      const activeUser = JSON.parse(localStorage.getItem('graphicStudioActiveUser') || 'null');
+      const isLoggedIn = Boolean(activeUser && activeUser.mobile);
+
+      const profileLink = document.getElementById('profileMenuLink');
+      const authLink = document.getElementById('authMenuLink');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (profileLink) profileLink.style.display = isLoggedIn ? 'block' : 'none';
+      if (logoutBtn) logoutBtn.style.display = isLoggedIn ? 'block' : 'none';
+      if (authLink) authLink.style.display = isLoggedIn ? 'none' : 'block';
+    }
+
     document.getElementById('logoutBtn').addEventListener('click', () => {
       localStorage.removeItem('graphicStudioActiveUser');
-      alert('আপনি লগআউট করেছেন।');
+      updateThreeDotMenuByAuth();
       window.location.href = 'index.html';
     });
 
-    // Live Clock & Date
+    updateThreeDotMenuByAuth();
+
     const bnMonths = [
       'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
       'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
@@ -922,6 +925,7 @@
 
       localStorage.setItem('graphicStudioUsers', JSON.stringify(users));
       localStorage.setItem('graphicStudioActiveUser', JSON.stringify(newUser));
+      updateThreeDotMenuByAuth();
 
       const resBox = document.getElementById('signupResult');
       resBox.className = 'result-box success';
@@ -938,7 +942,6 @@
     function handleLogin(event) {
       event.preventDefault();
 
-      const identifier = document.getElementById('loginIdentifier') ? document.getElementById('loginIdentifier').value.trim() : document.getElementById('loginMobile').value.trim();
       const mobile = document.getElementById('loginMobile').value.trim();
       const password = document.getElementById('loginPassword').value;
 
