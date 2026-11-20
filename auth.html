@@ -175,13 +175,57 @@
       color: var(--accent);
     }
 
-    /* Main Auth Box */
+    /* Main Desktop Split Layout: Left = Time, Right = Login/Signup */
     main {
       flex: 1;
-      max-width: 540px;
+      max-width: 1180px;
       width: 100%;
       margin: 28px auto;
-      padding: 0 16px;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .time-panel {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      position: sticky;
+      top: 84px;
+    }
+
+    .time-label {
+      font-size: 0.92rem;
+      color: #bfdbfe;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .live-time {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1.15;
+    }
+
+    .live-time span.ampm {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-left: 5px;
+      color: #93c5fd;
+    }
+
+    .live-date {
+      margin-top: 10px;
+      font-size: 1.02rem;
+      color: #e2e8f0;
+      font-weight: 500;
     }
 
     .auth-card {
@@ -282,6 +326,30 @@
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrap .form-control {
+      padding-right: 68px;
+    }
+
+    .toggle-pass-btn {
+      position: absolute;
+      right: 8px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 4px 9px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--text);
+      cursor: pointer;
     }
 
     /* Captcha Box */
@@ -438,6 +506,24 @@
       color: #cbd5e1;
     }
 
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        margin: 18px auto;
+        padding: 0 14px;
+        gap: 16px;
+      }
+
+      .time-panel {
+        position: static;
+        padding: 20px 16px;
+      }
+
+      .live-time {
+        font-size: 2rem;
+      }
+    }
+
     @media (max-width: 600px) {
       header {
         padding: 10px 12px;
@@ -500,17 +586,26 @@
     </div>
   </header>
 
+  <!-- Desktop View: Left = Live Time, Right = Login / Signup -->
   <main>
+    <!-- Left Column: Live Time -->
+    <aside class="time-panel" aria-label="বর্তমান সময়">
+      <div class="time-label">বর্তমান সময় ও তারিখ</div>
+      <div class="live-time" id="liveClock">12:00:00 <span class="ampm">AM</span></div>
+      <div class="live-date" id="liveDate">তারিখ লোড হচ্ছে...</div>
+    </aside>
+
+    <!-- Right Column: Login / Signup -->
     <div class="auth-card">
       <div class="tab-switch">
         <button type="button" class="tab-btn active" id="tabLogin" onclick="switchAuthTab('login')">লগইন</button>
         <button type="button" class="tab-btn" id="tabSignup" onclick="switchAuthTab('signup')">সাইনআপ</button>
       </div>
 
-      <!-- Login Panel: Only Mobile Number + Password -->
+      <!-- Login Panel: 11-digit Mobile Number + Password -->
       <section class="auth-panel active" id="loginPanel">
         <h1 class="auth-heading">অ্যাকাউন্টে লগইন করুন</h1>
-        <p class="auth-sub">যাদের অ্যাকাউন্ট আছে, তারা শুধু মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করুন।</p>
+        <p class="auth-sub">আপনার ১১ ডিজিটের মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করুন।</p>
 
         <form id="loginForm" novalidate onsubmit="handleLogin(event)">
           <div class="form-group">
@@ -519,22 +614,29 @@
               type="text"
               inputmode="numeric"
               id="loginMobile"
+              name="mobile"
               class="form-control"
               maxlength="11"
               placeholder="01XXXXXXXXX (১১ ডিজিট)"
               oninput="this.value = this.value.replace(/\D/g, '').slice(0, 11)"
+              autocomplete="username"
             />
             <div class="error-msg" id="loginMobileErr">সঠিক ১১ ডিজিটের মোবাইল নম্বর লিখুন।</div>
           </div>
 
           <div class="form-group">
             <label for="loginPassword" class="form-label">পাসওয়ার্ড <span class="req">*</span></label>
-            <input
-              type="password"
-              id="loginPassword"
-              class="form-control"
-              placeholder="আপনার পাসওয়ার্ড লিখুন"
-            />
+            <div class="password-wrap">
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                class="form-control"
+                placeholder="আপনার পাসওয়ার্ড লিখুন"
+                autocomplete="current-password"
+              />
+              <button type="button" class="toggle-pass-btn" id="toggleLoginPassBtn" onclick="togglePass('loginPassword', 'toggleLoginPassBtn')">দেখুন</button>
+            </div>
             <div class="error-msg" id="loginPasswordErr">পাসওয়ার্ড লিখুন।</div>
           </div>
 
@@ -579,13 +681,16 @@
 
           <div class="form-group">
             <label for="signupPassword" class="form-label">পাসওয়ার্ড <span class="req">*</span></label>
-            <input
-              type="password"
-              id="signupPassword"
-              name="password"
-              class="form-control"
-              placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড দিন"
-            />
+            <div class="password-wrap">
+              <input
+                type="password"
+                id="signupPassword"
+                name="password"
+                class="form-control"
+                placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড দিন"
+              />
+              <button type="button" class="toggle-pass-btn" id="toggleSignupPassBtn" onclick="togglePass('signupPassword', 'toggleSignupPassBtn')">দেখুন</button>
+            </div>
             <div class="error-msg" id="signupPasswordErr">কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড দিন।</div>
           </div>
 
@@ -668,12 +773,58 @@
       window.location.href = 'index.html';
     });
 
+    // Live Clock & Date
+    const bnMonths = [
+      'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
+      'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
+    ];
+    const bnDays = [
+      'রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'
+    ];
+
+    function toBnDigits(str) {
+      const bn = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return String(str).replace(/\d/g, d => bn[d]);
+    }
+
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      const hoursStr = String(hours).padStart(2, '0');
+
+      document.getElementById('liveClock').innerHTML =
+        `${hoursStr}:${minutes}:${seconds} <span class="ampm">${ampm}</span>`;
+
+      const dayName = bnDays[now.getDay()];
+      const dayNum = toBnDigits(now.getDate());
+      const monthName = bnMonths[now.getMonth()];
+      const yearNum = toBnDigits(now.getFullYear());
+
+      document.getElementById('liveDate').textContent =
+        `${dayName}, ${dayNum} ${monthName} ${yearNum}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
     function switchAuthTab(tab) {
       const isLogin = tab === 'login';
       document.getElementById('tabLogin').classList.toggle('active', isLogin);
       document.getElementById('tabSignup').classList.toggle('active', !isLogin);
       document.getElementById('loginPanel').classList.toggle('active', isLogin);
       document.getElementById('signupPanel').classList.toggle('active', !isLogin);
+    }
+
+    function togglePass(inputId, btnId) {
+      const input = document.getElementById(inputId);
+      const btn = document.getElementById(btnId);
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.textContent = show ? 'লুকান' : 'দেখুন';
     }
 
     let currentCaptchaCode = '';
@@ -759,7 +910,7 @@
         fullName: name,
         mobile,
         whatsapp: mobile,
-        email: email || 'দেওয়া হয়নি',
+        email: email || '',
         password
       };
 
@@ -777,7 +928,7 @@
       resBox.innerHTML = `
         <strong>আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!</strong><br>
         নাম: <strong>${name}</strong> | মোবাইল (WhatsApp): <strong>${mobile}</strong><br>
-        এখন থেকে আপনি শুধু মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করতে পারবেন।
+        এখন <strong>লগইন</strong> ট্যাব থেকে আপনার মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে লগইন করুন।
       `;
 
       document.getElementById('signupForm').reset();
@@ -786,6 +937,8 @@
 
     function handleLogin(event) {
       event.preventDefault();
+
+      const identifier = document.getElementById('loginIdentifier') ? document.getElementById('loginIdentifier').value.trim() : document.getElementById('loginMobile').value.trim();
       const mobile = document.getElementById('loginMobile').value.trim();
       const password = document.getElementById('loginPassword').value;
 
@@ -795,25 +948,21 @@
       const passOk = password.length > 0;
       setErr('loginPassword', 'loginPasswordErr', !passOk);
 
-      const resBox = document.getElementById('loginResult');
-      resBox.className = 'result-box';
-      resBox.style.display = 'none';
+      const statusBox = document.getElementById('loginResult');
+      statusBox.className = 'result-box';
+      statusBox.style.display = 'none';
 
       if (!mobileOk || !passOk) return;
 
       const users = getUsersList();
-      const matchedUser = users.find(u => u.mobile === mobile && u.password === password);
+      const matched = users.find(u => u.mobile === mobile && u.password === password);
 
-      if (matchedUser) {
-        localStorage.setItem('graphicStudioActiveUser', JSON.stringify(matchedUser));
-        resBox.className = 'result-box success';
-        resBox.innerHTML = `
-          স্বাগতম, <strong>${matchedUser.fullName}</strong>! আপনি সফলভাবে লগইন করেছেন।<br>
-          <a href="digital-eservice.html" style="color:inherit; font-weight:700; text-decoration:underline;">ডিজিটাল ই-সার্ভিস পেজে যান →</a>
-        `;
+      if (matched) {
+        localStorage.setItem('graphicStudioActiveUser', JSON.stringify(matched));
+        window.location.href = 'index.html';
       } else {
-        resBox.className = 'result-box error-box';
-        resBox.innerHTML = `মোবাইল নম্বর বা পাসওয়ার্ড সঠিক নয়। অ্যাকাউন্ট না থাকলে <strong>সাইনআপ</strong> ট্যাব থেকে নতুন অ্যাকাউন্ট তৈরি করুন।`;
+        statusBox.className = 'result-box error-box';
+        statusBox.innerHTML = `মোবাইল নম্বর বা পাসওয়ার্ড সঠিক নয়। অ্যাকাউন্ট না থাকলে আগে <strong>সাইনআপ</strong> করে নিন।`;
       }
     }
 
