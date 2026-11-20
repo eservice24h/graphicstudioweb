@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphic Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-soft: #eff6ff;
+      --emerald: #059669;
+      --emerald-soft: #ecfdf5;
+      --notice-bg: #fffbeb;
+      --notice-border: #f59e0b;
+      --notice-text: #92400e;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #e2e8f0;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 7px 13px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+    }
+
+    /* Three-Dot Menu */
+    .more-menu {
+      position: relative;
+    }
+
+    .three-dot-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      line-height: 1;
+      transition: background 0.2s ease;
+    }
+
+    .three-dot-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 44px;
+      min-width: 195px;
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+      padding: 6px;
+      z-index: 200;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .dropdown-menu a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 9px 12px;
+      border-radius: 7px;
+      transition: background 0.15s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: var(--bg);
+      color: var(--accent);
+    }
+
+    /* Main Content Layout */
+    main {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--border);
+    }
+
+    /* Left Column: Live Clock, Notice Board & Highlighted Instructions */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .clock-box {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .live-time {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1.15;
+    }
+
+    .live-time span.ampm {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-left: 4px;
+      color: #93c5fd;
+    }
+
+    .live-date {
+      margin-top: 6px;
+      font-size: 0.98rem;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    /* Notice Board Section */
+    .notice-card {
+      border: 1.5px solid var(--notice-border);
+      background: var(--notice-bg);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .notice-header {
+      background: var(--notice-border);
+      color: #ffffff;
+      padding: 8px 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notice-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--notice-text);
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .notice-item {
+      padding-bottom: 8px;
+      border-bottom: 1px dashed rgba(217, 119, 6, 0.35);
+      font-weight: 600;
+    }
+
+    .notice-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    /* Highlighted Instruction Boxes (2 Separate Lines Below Notice Board) */
+    .instruction-boxes {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .highlight-box {
+      padding: 11px 14px;
+      border-radius: 9px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      border-left: 4px solid;
+      line-height: 1.4;
+    }
+
+    .highlight-box.digital {
+      background: var(--accent-soft);
+      color: #1e40af;
+      border-color: var(--accent);
+    }
+
+    .highlight-box.graphics {
+      background: var(--emerald-soft);
+      color: #065f46;
+      border-color: var(--emerald);
+    }
+
+    /* Right Column: Services & Boxes */
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+    }
+
+    .card-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #f8fafc;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-label {
+      padding: 9px 8px;
+      text-align: center;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .card-label.en-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Bottom Tagline Banner */
+    .tagline-banner {
+      background: var(--primary);
+      color: #ffffff;
+      text-align: center;
+      padding: 12px 16px;
+      border-radius: 9px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 24px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-left {
+      font-size: 0.95rem;
+      color: #ffffff;
+    }
+
+    .footer-left i {
+      font-family: 'Poppins', sans-serif;
+      font-style: italic;
+      font-weight: 600;
+      color: #93c5fd;
+    }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    /* Tablet & Mobile Normal Layout */
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        margin: 14px auto;
+        padding: 0 12px;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 10px 12px;
+      }
+
+      .brand-title {
+        font-size: 1.25rem;
+      }
+
+      nav a {
+        font-size: 0.78rem;
+        padding: 5px 8px;
+      }
+
+      .three-dot-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.15rem;
+      }
+
+      .panel {
+        padding: 12px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .card-img-wrap {
+        aspect-ratio: 16 / 10;
+      }
+
+      .tagline-banner {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+      }
+
+      .highlight-box {
+        font-size: 0.86rem;
+        padding: 10px 12px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-title">Graphic Studio</span>
+        <span class="brand-sub">ভূইয়া অফসেট প্রিন্টিং প্রেস</span>
+      </div>
+
+      <div class="nav-right">
+        <nav>
+          <a href="index.html" class="active">হোম পেজ</a>
+          <a href="design-printing.html">ডিজাইন অ্যান্ড প্রিন্টিং</a>
+          <a href="digital-eservice.html">ডিজিটাল ই-সার্ভিস</a>
+        </nav>
+
+        <div class="more-menu">
+          <button type="button" class="three-dot-btn" id="threeDotBtn" aria-label="আরও অপশন" aria-expanded="false">&#8942;</button>
+          <div class="dropdown-menu" id="threeDotDropdown">
+            <a href="auth.html">লগইন / সাইনআপ</a>
+            <a href="contact.html">যোগাযোগ</a>
+            <a href="admin-login.html">অ্যাডমিন লগইন</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Left Column: Live Clock, Notice Board & Highlighted Instructions -->
+    <aside class="panel left-column">
+      <div class="clock-box">
+        <div class="live-time" id="liveClock">12:00:00 <span class="ampm">AM</span></div>
+        <div class="live-date" id="liveDate">তারিখ লোড হচ্ছে...</div>
+      </div>
+
+      <!-- Notice Board -->
+      <div class="notice-card">
+        <div class="notice-header">
+          <span>&#128226;</span>
+          <span>নোটিশ বোর্ড</span>
+        </div>
+        <div class="notice-body">
+          <div class="notice-item">
+            স্বাগতম! আমাদের সকল ডিজাইন, প্রিন্টিং ও অনলাইন সার্ভিস নিয়মিত চালু রয়েছে।
+          </div>
+          <div class="notice-item">
+            জরুরি প্রয়োজনে উপরের থ্রি ডট (&#8942;) মেনু থেকে "যোগাযোগ" অপশনে গিয়ে সরাসরি যোগাযোগ করতে পারবেন।
+          </div>
+        </div>
+      </div>
+
+      <!-- Highlighted Instruction Boxes (2 Separate Lines Below Notice Board) -->
+      <div class="instruction-boxes">
+        <div class="highlight-box digital">
+          ডিজিটাল ই-সার্ভিসের জন্য উপরের "ডিজিটাল ই-সার্ভিস" বাটনে ক্লিক করে প্রবেশ করুন।
+        </div>
+        <div class="highlight-box graphics">
+          গ্রাফিকস ডিজাইন অথবা প্রিন্টিং এর জন্য উপরের "ডিজাইন অ্যান্ড প্রিন্টিং" বাটনে ক্লিক করে প্রবেশ করুন।
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Column: Services & Boxes -->
+    <section class="right-column">
+      <!-- Graphics Design Section -->
+      <div class="panel">
+        <h2 class="section-title">গ্রাফিক্স ডিজাইন</h2>
+        <div class="cards-grid">
+          <div class="service-card">
+            <div class="card-img-wrap">
+              <img src="1vcard.jpg" alt="ভিজিটিং কার্ড" />
+            </div>
+            <div class="card-label">ভিজিটিং কার্ড</div>
+          </div>
+
+          <div class="service-card">
+            <div class="card-img-wrap">
+              <img src="1poster.jpg" alt="পোস্টার" />
+            </div>
+            <div class="card-label">পোস্টার</div>
+          </div>
+
+          <div class="service-card">
+            <div class="card-img-wrap">
+              <img src="1leaflet.jpg" alt="লিফলেট" />
+            </div>
+            <div class="card-label">লিফলেট</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Digital e-Service Section -->
+      <div class="panel">
+        <h2 class="section-title">ডিজিটাল ই-সার্ভিস</h2>
+        <div class="cards-grid">
+          <div class="service-card">
+            <div class="card-img-wrap">
+              <img src="1nid.jpg" alt="এনআইডি কার্ডের সকল সার্ভিস" />
+            </div>
+            <div class="card-label">এনআইডি কার্ডের সকল সার্ভিস</div>
+          </div>
+
+          <div class="service-card">
+            <div class="card-img-wrap">
+              <img src="1passport.jpg" alt="পাসপোর্টের সকল সার্ভিস" />
+            </div>
+            <div class="card-label">পাসপোর্টের সকল সার্ভিস</div>
+          </div>
+
+          <!-- TIN Certificate Image with e-TIN, e-VAT, e-Return Label -->
+          <div class="service-card">
+            <div class="card-img-wrap">
+              <img src="1etin.png" alt="e-TIN, e-VAT, e-Return" />
+            </div>
+            <div class="card-label en-label">e-TIN, e-VAT, e-Return</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Tagline Banner -->
+      <div class="tagline-banner">
+        এছাড়াও ডিজাইন, প্রিন্টিং এবং অনলাইনের সকল কাজ এখন এক প্ল্যাটফর্মে।
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        Operated by <i>Istiake Mahin</i>
+      </div>
+      <div class="footer-right">
+        ভূইয়া অফসেট প্রিন্টিং প্রেস দ্বারা পরিচালিত
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Three-Dot Dropdown Toggle
+    const threeDotBtn = document.getElementById('threeDotBtn');
+    const threeDotDropdown = document.getElementById('threeDotDropdown');
+
+    threeDotBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = threeDotDropdown.classList.toggle('show');
+      threeDotBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!threeDotDropdown.contains(e.target) && e.target !== threeDotBtn) {
+        threeDotDropdown.classList.remove('show');
+        threeDotBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Live Clock & Date
+    const bnMonths = [
+      'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',
+      'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'
+    ];
+    const bnDays = [
+      'রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'
+    ];
+
+    function toBnDigits(str) {
+      const bn = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return String(str).replace(/\d/g, d => bn[d]);
+    }
+
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      const hoursStr = String(hours).padStart(2, '0');
+
+      document.getElementById('liveClock').innerHTML =
+        `${hoursStr}:${minutes}:${seconds} <span class="ampm">${ampm}</span>`;
+
+      const dayName = bnDays[now.getDay()];
+      const dayNum = toBnDigits(now.getDate());
+      const monthName = bnMonths[now.getMonth()];
+      const yearNum = toBnDigits(now.getFullYear());
+
+      document.getElementById('liveDate').textContent =
+        `${dayName}, ${dayNum} ${monthName} ${yearNum}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
